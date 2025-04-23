@@ -16,12 +16,12 @@ BengkelPC adalah platform e-commerce yang memudahkan pengguna untuk membeli komp
 
 ## 🛠️ Teknologi yang Digunakan
 
-- **Frontend**: 
-- **Backend**: 
-- **Database**: 
-- **Authentication**: 
-- **Payment Gateway**: 
-- **Deployment**: 
+- **Frontend**: React
+- **Backend**: Node.js
+- **Database**: MongoDB/MySQL
+- **Authentication**: JWT
+- **Payment Gateway**: stripe
+- **Deployment**: Docker
 
 ## 📁 Struktur Project
 
