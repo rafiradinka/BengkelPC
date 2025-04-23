@@ -8,65 +8,45 @@ BengkelPC adalah platform e-commerce yang memudahkan pengguna untuk membeli komp
 
 🛒 Belanja Komponen PC
 
-Katalog Komprehensif: Tersedia berbagai jenis komponen PC dari berbagai merek terkemuka:
-
-Processor: Intel dan AMD dengan berbagai generasi dan seri
-Motherboard: Berbagai chipset dan form factor (ATX, Micro-ATX, Mini-ITX)
-RAM: DDR4 dan DDR5 dengan berbagai kapasitas dan kecepatan
-Storage: SSD (SATA, NVMe, M.2) dan HDD dengan berbagai kapasitas
-VGA/GPU: Kartu grafis gaming hingga workstation
-Power Supply: Berbagai wattage dan sertifikasi efisiensi
-Casing: Berbagai ukuran dan desain
-Cooling: Fan, AIO, dan sistem pendingin lainnya
-Aksesoris: Kabel, adaptor, dan peralatan pendukung
-
-
-Filter Pencarian Canggih: Pencarian berdasarkan spesifikasi detail, harga, dan ketersediaan
-Perbandingan Produk: Fitur untuk membandingkan spesifikasi komponen secara side-by-side
-Ulasan Produk: Sistem rating dan review dari pengguna lain
+- Katalog Komprehensif: Tersedia berbagai jenis komponen PC dari berbagai merek terkemuka:
+- Filter Pencarian Canggih: Pencarian berdasarkan spesifikasi detail, harga, dan ketersediaan
+- Perbandingan Produk: Fitur untuk membandingkan spesifikasi komponen secara side-by-side
+- Ulasan Produk: Sistem rating dan review dari pengguna lain
 
 🔧 Layanan Jasa Rakit PC Custom
 
-PC Builder Tool: Antarmuka interaktif untuk memilih komponen yang kompatibel
-Verifikasi Kompatibilitas: Sistem otomatis yang memastikan semua komponen yang dipilih kompatibel
-Estimasi Performa: Prediksi performa sistem berdasarkan komponennya
-Opsi Perakitan:
-
-Standar: Perakitan dan pengujian dasar
-Premium: Termasuk cable management, optimasi sistem, dan pengujian ekstensif
-Ekspres: Perakitan diprioritaskan dan selesai dalam 24 jam
-
-
-Pengaturan Software: Instalasi sistem operasi dan driver penting
-Garansi Perakitan: Jaminan kualitas pada proses perakitan
+- PC Builder Tool: Antarmuka interaktif untuk memilih komponen yang kompatibel
+- Verifikasi Kompatibilitas: Sistem otomatis yang memastikan semua komponen yang dipilih kompatibel
+- Estimasi Performa: Prediksi performa sistem berdasarkan komponennya
+- Opsi Perakitan:
+- Standar: Perakitan dan pengujian dasar
+- Premium: Termasuk cable management, optimasi sistem, dan pengujian ekstensif
+- Ekspres: Perakitan diprioritaskan dan selesai dalam 24 jam
+- Pengaturan Software: Instalasi sistem operasi dan driver penting
+- Garansi Perakitan: Jaminan kualitas pada proses perakitan
 
 💬 Konsultasi Spesifikasi PC
 
-Live Chat dengan Teknisi: Bantuan real-time dari teknisi berpengalaman
-Rekomendasi PC Berdasarkan Kebutuhan: Saran sesuai kebutuhan (gaming, rendering, office, dll)
-Konsultasi Anggaran: Bantuan untuk memaksimalkan performa dalam batasan anggaran
-Analisis Upgrade: Rekomendasi komponen mana yang sebaiknya diupgrade
-Diagnostik Masalah: Bantuan mendiagnosis masalah pada PC yang sudah ada
-Artikel dan Tutorial: Konten edukasi tentang perakitan dan pemeliharaan PC
+- Live Chat dengan Teknisi: Bantuan real-time dari teknisi berpengalaman
+- Konsultasi Anggaran: Bantuan untuk memaksimalkan performa dalam batasan anggaran
+- Artikel dan Tutorial: Konten edukasi tentang perakitan dan pemeliharaan PC
 
 💳 Berbagai Metode Pembayaran
 
-Kartu Kredit/Debit: Visa, Mastercard, dan jaringan kartu utama lainnya
-E-Wallet: GoPay, OVO, Dana, ShopeePay, dll
-Bank Transfer: Transfer bank lokal dan internasional
-Virtual Account: Pembayaran melalui virtual account bank
-Cicilan: Opsi cicilan 0% dengan bank partner
-Point Reward: Sistem point untuk setiap transaksi, dapat ditukarkan dengan diskon
-Pembayaran di Tempat (COD): Untuk area-area tertentu
+- Kartu Kredit/Debit: Visa, Mastercard, dan jaringan kartu utama lainnya
+- E-Wallet: GoPay, OVO, Dana, ShopeePay, dll
+- Bank Transfer: Transfer bank lokal dan internasional
+- Virtual Account: Pembayaran melalui virtual account bank
+- Pembayaran di Tempat (COD): Untuk area-area tertentu
 
 ## 🛠️ Teknologi yang Digunakan
 
-- **Frontend**: 
-- **Backend**: 
-- **Database**: 
-- **Authentication**: 
-- **Payment Gateway**: 
-- **Deployment**: 
+- **Frontend**: -
+- **Backend**: -
+- **Database**: -
+- **Authentication**: -
+- **Payment Gateway**: -
+- **Deployment**: -
 
 ## 📁 Struktur Project
 
