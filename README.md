@@ -6,22 +6,67 @@ BengkelPC adalah platform e-commerce yang memudahkan pengguna untuk membeli komp
 
 ## ✨ Fitur Utama
 
-- 🛒 Belanja komponen PC (Processor, Motherboard, RAM, dll)
-- 🔧 Layanan jasa rakit PC custom
-- 👤 Manajemen akun pengguna
-- 📦 Pelacakan pengiriman
-- 💬 Konsultasi spesifikasi PC
-- 🛡️ Garansi produk dan layanan
-- 💳 Berbagai metode pembayaran
+🛒 Belanja Komponen PC
+
+Katalog Komprehensif: Tersedia berbagai jenis komponen PC dari berbagai merek terkemuka:
+
+Processor: Intel dan AMD dengan berbagai generasi dan seri
+Motherboard: Berbagai chipset dan form factor (ATX, Micro-ATX, Mini-ITX)
+RAM: DDR4 dan DDR5 dengan berbagai kapasitas dan kecepatan
+Storage: SSD (SATA, NVMe, M.2) dan HDD dengan berbagai kapasitas
+VGA/GPU: Kartu grafis gaming hingga workstation
+Power Supply: Berbagai wattage dan sertifikasi efisiensi
+Casing: Berbagai ukuran dan desain
+Cooling: Fan, AIO, dan sistem pendingin lainnya
+Aksesoris: Kabel, adaptor, dan peralatan pendukung
+
+
+Filter Pencarian Canggih: Pencarian berdasarkan spesifikasi detail, harga, dan ketersediaan
+Perbandingan Produk: Fitur untuk membandingkan spesifikasi komponen secara side-by-side
+Ulasan Produk: Sistem rating dan review dari pengguna lain
+
+🔧 Layanan Jasa Rakit PC Custom
+
+PC Builder Tool: Antarmuka interaktif untuk memilih komponen yang kompatibel
+Verifikasi Kompatibilitas: Sistem otomatis yang memastikan semua komponen yang dipilih kompatibel
+Estimasi Performa: Prediksi performa sistem berdasarkan komponennya
+Opsi Perakitan:
+
+Standar: Perakitan dan pengujian dasar
+Premium: Termasuk cable management, optimasi sistem, dan pengujian ekstensif
+Ekspres: Perakitan diprioritaskan dan selesai dalam 24 jam
+
+
+Pengaturan Software: Instalasi sistem operasi dan driver penting
+Garansi Perakitan: Jaminan kualitas pada proses perakitan
+
+💬 Konsultasi Spesifikasi PC
+
+Live Chat dengan Teknisi: Bantuan real-time dari teknisi berpengalaman
+Rekomendasi PC Berdasarkan Kebutuhan: Saran sesuai kebutuhan (gaming, rendering, office, dll)
+Konsultasi Anggaran: Bantuan untuk memaksimalkan performa dalam batasan anggaran
+Analisis Upgrade: Rekomendasi komponen mana yang sebaiknya diupgrade
+Diagnostik Masalah: Bantuan mendiagnosis masalah pada PC yang sudah ada
+Artikel dan Tutorial: Konten edukasi tentang perakitan dan pemeliharaan PC
+
+💳 Berbagai Metode Pembayaran
+
+Kartu Kredit/Debit: Visa, Mastercard, dan jaringan kartu utama lainnya
+E-Wallet: GoPay, OVO, Dana, ShopeePay, dll
+Bank Transfer: Transfer bank lokal dan internasional
+Virtual Account: Pembayaran melalui virtual account bank
+Cicilan: Opsi cicilan 0% dengan bank partner
+Point Reward: Sistem point untuk setiap transaksi, dapat ditukarkan dengan diskon
+Pembayaran di Tempat (COD): Untuk area-area tertentu
 
 ## 🛠️ Teknologi yang Digunakan
 
-- **Frontend**: React
-- **Backend**: Node.js
-- **Database**: MongoDB/MySQL
-- **Authentication**: JWT
-- **Payment Gateway**: stripe
-- **Deployment**: Docker
+- **Frontend**: 
+- **Backend**: 
+- **Database**: 
+- **Authentication**: 
+- **Payment Gateway**: 
+- **Deployment**: 
 
 ## 📁 Struktur Project
 
@@ -97,10 +142,15 @@ Saat ini project berada dalam tahap **perencanaan**. Kami sedang merancang arsit
 
 ## 👥 Tim Pengembang
 
-- Radinka Rafi - Project Manager 
-- Azza - Developer
-- Diva Ahmad P - UI/UX Designer
-- Fauzan ZF - Maintener
+## Tim Pengembang
+
+| Nama        | Posisi                        | NIM                                         | GitHub       |
+|-------------|-------------------------------|---------------------------------------------|--------------|
+| Radinka Rafi | Project Manager              | 23106050059                                 | [@rafiradinka](https://github.com/rafiradinka) |
+| Azza   |  Developer                         | 231060500                                 | [@azzatuz](https://github.com/azzatuz) |
+| Diva Ahmad   | UI/UX Designer               | 23106050076                                 | [@DivaIsReal](https://github.com/DivaIsReal) |
+| Fauzan Zaki   | Maintener                   | 23106050047                                 | [@FauzanZF](https://github.com/FauzanZF) |
+
 
 ## 🤝 Kontribusi
 
