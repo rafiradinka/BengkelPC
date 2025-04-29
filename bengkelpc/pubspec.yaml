@@ -1,0 +1,52 @@
+name: bengkelpc
+description: "A new Flutter project."
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: ^3.7.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/example.png
+    - assets/images/aqua.jpg
+    - assets/images/beng_beng.jpg
+    - assets/images/beras_pandan.jpg
+    - assets/images/cap_kaki_tiga.jpg
+    - assets/images/chitato.jpg
+    - assets/images/choki_choki.jpg
+    - assets/images/floridina.jpg
+    - assets/images/fruit_tea.jpg
+    - assets/images/garam_dapur.jpg
+    - assets/images/good_time.jpg
+    - assets/images/gula_pasir.jpg
+    - assets/images/jetz_stick.jpg
+    - assets/images/kecap_abc.jpg
+    - assets/images/malkist.jpg
+    - assets/images/minyak_goreng.jpg
+    - assets/images/minyak_wijen.jpg
+    - assets/images/mizone.jpg
+    - assets/images/nutrisari.jpg
+    - assets/images/oreo.jpg
+    - assets/images/qtela.jpg
+    - assets/images/sarden_abc.jpg
+    - assets/images/susu_bubuk.jpg
+    - assets/images/taro.jpg
+    - assets/images/teh_botol.jpg
+    - assets/images/tepung_segitiga.jpg
+    - assets/images/tictac.jpg
+    - assets/images/ultra_milk.jpg
+    - assets/images/you_c_1000.jpg
+    - assets/images/teh_celup_sosro.jpg
+    - assets/images/teh_pucuk.jpg
+
