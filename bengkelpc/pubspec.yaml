@@ -1,6 +1,6 @@
-name: bengkelpc
+name: BengkelPC
 description: "A new Flutter project."
-publish_to: 'none'
+publish_to: "none"
 version: 0.1.0
 
 environment:
@@ -9,44 +9,111 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  shared_preferences: ^2.2.2
+  salomon_bottom_bar: ^3.3.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^5.0.0
+  flutter_launcher_icons: ^0.13.1
 
 flutter:
   uses-material-design: true
   assets:
-    - assets/images/example.png
-    - assets/images/aqua.jpg
-    - assets/images/beng_beng.jpg
-    - assets/images/beras_pandan.jpg
-    - assets/images/cap_kaki_tiga.jpg
-    - assets/images/chitato.jpg
-    - assets/images/choki_choki.jpg
-    - assets/images/floridina.jpg
-    - assets/images/fruit_tea.jpg
-    - assets/images/garam_dapur.jpg
-    - assets/images/good_time.jpg
-    - assets/images/gula_pasir.jpg
-    - assets/images/jetz_stick.jpg
-    - assets/images/kecap_abc.jpg
-    - assets/images/malkist.jpg
-    - assets/images/minyak_goreng.jpg
-    - assets/images/minyak_wijen.jpg
-    - assets/images/mizone.jpg
-    - assets/images/nutrisari.jpg
-    - assets/images/oreo.jpg
-    - assets/images/qtela.jpg
-    - assets/images/sarden_abc.jpg
-    - assets/images/susu_bubuk.jpg
-    - assets/images/taro.jpg
-    - assets/images/teh_botol.jpg
-    - assets/images/tepung_segitiga.jpg
-    - assets/images/tictac.jpg
-    - assets/images/ultra_milk.jpg
-    - assets/images/you_c_1000.jpg
-    - assets/images/teh_celup_sosro.jpg
-    - assets/images/teh_pucuk.jpg
+    - assets/images/example1.png
+    - assets/images/logo.png
+    - assets/images/Core_i5-10600K.png
+    - assets/images/Core_i5-11600K.png
+    - assets/images/Core_i5-12600K.png
+    - assets/images/Core_i7-10700K.png
+    - assets/images/Core_i7-11700K.png
+    - assets/images/Core_i7-12700K.png
+    - assets/images/Core_i9-10900K.png
+    - assets/images/Core_i9-11900K.png
+    - assets/images/Core_i9-12900K.png
+    - assets/images/Ryzen_5_3600X.png
+    - assets/images/Ryzen_5_5600X.png
+    - assets/images/Ryzen_5_7600X.png
+    - assets/images/Ryzen_7_3800X.png
+    - assets/images/Ryzen_7_5800X.png
+    - assets/images/Ryzen_7_7700X.png
+    - assets/images//Ryzen_9_3900X.png
+    - assets/images/Ryzen_9_5900X.png
+    - assets/images/Ryzen_9_7950X.png
+    - assets/images/NVIDIA_GeForce_RTX_3060_Ti.png
+    - assets/images/NVIDIA_GeForce_RTX_3070.png
+    - assets/images/NVIDIA_GeForce_RTX_3080.png
+    - assets/images/NVIDIA_GeForce_RTX_3090.png
+    - assets/images/NVIDIA_GeForce_RTX_4060_Ti.png
+    - assets/images/NVIDIA_GeForce_RTX_4070_Ti.png
+    - assets/images/NVIDIA_GeForce_RTX_4080.png
+    - assets/images/AMD_Radeon_RX_6700_XT.png
+    - assets/images/AMD_Radeon_RX_6800.png
+    - assets/images/AMD_Radeon_RX_6800_XT.png
+    - assets/images/AMD_Radeon_RX_6900_XT.png
+    - assets/images/AMD_Radeon_RX_7600_XT.png
+    - assets/images/AMD_Radeon_RX_7800_XT.png
+    - assets/images/AMD_Radeon_RX_7900_XTX.png
+    - assets/images/AMD_Radeon_RX_7900_XT.png
+    - assets/images/Corsair_Vengeance_LPX_DDR4.png
+    - assets/images/Corsair_Vengeance_DDR5.png
+    - assets/images/G.Skill_Ripjaw+G6s_V_DDR4.png
+    - assets/images/G.Skill_Trident_Z5_DDR5.png
+    - assets/images/Kingston_FURY_Beast_DDR5.png
+    - assets/images/Kingston_HyperX_Fury_DDR4.png
+    - assets/images/ASUS_TUF_Gaming_GT502.png
+    - assets/images/be_quiet!_Dark_Base_900_Rev._2.png
+    - assets/images/Corsair_iCUE_5000T_RGB.png
+    - assets/images/Phanteks_Eclipse_G360A.png
+    - assets/images/Fractal_Design_Meshify_2.png
+    - assets/images/Lian_Li_PC-011_Dynamic_Evo.png
+    - assets/images/MSI_MAG_Forge_100R.png
+    - assets/images/NZXT_H9_Flow.png
+    - assets/images/Thermaltake_Divider_370TG.png
+    - assets/images/Arctic_Freezer_34_eSports.png
+    - assets/images/Arctic_Liquid_Freezer_II_360.png
+    - assets/images/ASUS_ROG_Strix_LC_II_360.png
+    - assets/images/be_quiet!_Dark_Rock_Pro_4.png
+    - assets/images/Cooler_Master_Hyper_212_Halo.png
+    - assets/images/Cooler_Master_MasterLiquid_ML360R.png
+    - assets/images/Corsair_iCUE_H100i_Elite_Capellix.png
+    - assets/images/Corsair_iCUE_H150i_Elite_Capellix.png
+    - assets/images/MSI_MAG_CoreLiquid_360R.png
+    - assets/images/Noctua_NH-D15_Chromax_Black.png
+    - assets/images/NZXT_Kraken_Elite_360_RBG.png
+    - assets/images/Phanteks_PH-TC14PE.png
+    - assets/images/ASRock_B550_Steel_Legend.png
+    - assets/images/ASUS_ROG_Crosshair_VIII_Hero_(Wi-Fi).png
+    - assets/images/ASUS_ROG_Strix_B550-F_Gaming_(Wi-Fi).png
+    - assets/images/ASUS_ROG_Strix_Z690-E_Gaming_WiFi.png
+    - assets/images/ASUS_TUF_Gaming_B550-PLUS_(Wi-Fi).png
+    - assets/images/Gigabyte_Z590_AORUS_Master.png
+    - assets/images/Gigabyte_Z690_AORUS_Pro.png
+    - assets/images/MSI_MAG_B550_TOMAHAWK_MAX.png
+    - assets/images/MSI_MPG_Z490_Gaming_Edge_WiFi.png
+    - assets/images/MSI_Z690_Unify.png
+    - assets/images/Power_Supply_ASUS_ROG_STRIX_850G.png
+    - assets/images/be_quiet!_STRAIGHT_POWER_11_850W.png
+    - assets/images/COOLER_MASTER_MWE_GOLD_850_V2.png
+    - assets/images/Corsair_HX1200_Platinum.png
+    - assets/images/Corsair_RM850X_Cybenetics_Gold.png
+    - assets/images/MSI_MPG_A850GF.png
+    - assets/images/POWER_SUPPLY_PSU_SEASONIC_FOCUS_GOLD_GX-850.png
+    - assets/images/Thermaltake_Toughpower_GF1_750W_80+.png
+    - assets/images/Adata_XPG_Gammix_S70.png
+    - assets/images/Corsair_MP600_Pro_LPX.png
+    - assets/images/Crucial_P5_Plus.png
+    - assets/images/Intel_SSD_670p.png
+    - assets/images/Kingston_NV2.png
+    - assets/images/PNY_XLR8_CS3140.png
+    - assets/images/Sabrent_Rocket_4_Plus.png
+    - assets/images/SAMSUNG_980_PRO.png
+    - assets/images/Seagate_FireCuda_530.png
+    - assets/images/Western_Digital_WD_Black_SN850X.png
+    - assets/data/users.json
 
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/MartDooraIcon2.png"

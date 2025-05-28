@@ -1,0 +1,14 @@
+[
+  {"username": "admin", "password": "admin123", "role": "seller"},
+  {"username": "nisa", "password": "nisa123", "role": "buyer"},
+  {"username": "fajar", "password": "fajar123", "role": "buyer"},
+  {"username": "nurul", "password": "nurul123", "role": "buyer"},
+  {"username": "ahmad", "password": "ahmad123", "role": "buyer"},
+  {"username": "beni", "password": "beni123", "role": "buyer"},
+  {"username": "caca", "password": "caca123", "role": "buyer"},
+  {"username": "denis", "password": "denis123", "role": "buyer"},
+  {"username": "erlangga", "password": "erlangga123", "role": "buyer"},
+  {"username": "faiz", "password": "faiz123", "role": "buyer"},
+  {"username": "z", "password": "z", "role": "buyer"},
+  {"username":"x","password":"x", "role":"seller"}
+]
