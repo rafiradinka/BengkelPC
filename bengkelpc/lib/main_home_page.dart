@@ -59,58 +59,93 @@ class _MainHomePageState extends State<MainHomePage> {
     });
   }
 
-  PreferredSizeWidget _buildHomeAppBar() {
-    return PreferredSize(
-      preferredSize: const Size.fromHeight(180),
-      child: Container(
-        padding: const EdgeInsets.all(16),
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Colors.pinkAccent, Colors.deepPurpleAccent],
-          ),
-          borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(30),
-            bottomRight: Radius.circular(30),
-          ),
+ PreferredSizeWidget _buildHomeAppBar() {
+  return PreferredSize(
+    preferredSize: const Size.fromHeight(220),
+    child: Container(
+      padding: const EdgeInsets.all(16),
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          colors: [Color(0xFF2196F3), Color(0xFF0D47A1)],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
         ),
-        child: SafeArea(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  const CircleAvatar(
-                    backgroundImage: AssetImage('assets/images/example1.png'),
-                    radius: 30,
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(30),
+          bottomRight: Radius.circular(30),
+        ),
+      ),
+      child: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Tulisan Bengkel PC
+            const Text(
+              'Bengkel PC',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 28,
+                fontWeight: FontWeight.bold,
+                letterSpacing: 1.2,
+              ),
+            ),
+            const SizedBox(height: 14),
+            Row(
+              children: [
+                const CircleAvatar(
+                  backgroundImage: AssetImage('assets/images/example1.png'),
+                  radius: 26,
+                ),
+                const SizedBox(width: 14),
+                const Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Selamat Datang 👋',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      SizedBox(height: 4),
+                      Text(
+                        'Penuhi kebutuhan PC-mu di sini!',
+                        style: TextStyle(color: Colors.white70, fontSize: 14),
+                      ),
+                      SizedBox(height: 2),
+                      Text(
+                        'Jl. Letjen Sutoyo, Mojosongo, Solo',
+                        style: TextStyle(color: Colors.white60, fontSize: 12),
+                      ),
+                    ],
                   ),
-                  const SizedBox(width: 16),
-                  const Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Selamat Berbelanja',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Text(
-                          'Mudahnya berbelanja, bahagianya bersama',
-                          style: TextStyle(color: Colors.white70, fontSize: 14),
-                        ),
-                        Text(
-                          'Jl. Letjen Sutoyo, Mojosongo, Solo',
-                          style: TextStyle(color: Colors.white54, fontSize: 12),
-                        ),
-                      ],
-                    ),
+                ),
+                IconButton(
+                  onPressed: () {
+                    // aksi keranjang
+                  },
+                  icon: const Icon(Icons.shopping_cart_outlined,
+                      color: Colors.white, size: 28),
+                ),
+              ],
+            ),
+            const SizedBox(height: 16),
+            // Search Bar mewah
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(14),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.10),
+                    blurRadius: 8,
+                    offset: const Offset(0, 4),
                   ),
                 ],
               ),
-              const SizedBox(height: 10),
-              TextField(
+              child: TextField(
                 controller: searchController,
                 onChanged: (value) {
                   setState(() {
@@ -118,23 +153,21 @@ class _MainHomePageState extends State<MainHomePage> {
                   });
                 },
                 decoration: InputDecoration(
-                  hintText:
-                      'Cari produk...'
-                      '',
-                  prefixIcon: const Icon(Icons.search),
-                  filled: true,
-                  fillColor: Colors.white,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
+                  hintText: 'Cari produk terbaik untuk PC kamu...',
+                  hintStyle: const TextStyle(fontSize: 14, color: Colors.black54),
+                  prefixIcon: const Icon(Icons.search, color: Colors.grey),
+                  border: InputBorder.none,
+                  contentPadding: const EdgeInsets.symmetric(vertical: 14),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
-    );
-  }
+    ),
+  );
+}
+
 
   PreferredSizeWidget _buildPageAppBar() {
     if (_selectedIndex == 4) {

@@ -23,6 +23,7 @@ flutter:
   assets:
     - assets/images/example1.png
     - assets/images/logo.png
+    - assets/images/logo2.png
     - assets/images/Core_i5-10600K.png
     - assets/images/Core_i5-11600K.png
     - assets/images/Core_i5-12600K.png
