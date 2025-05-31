@@ -58,8 +58,9 @@ class _MainHomePageState extends State<MainHomePage> {
       }
     });
   }
-
- PreferredSizeWidget _buildHomeAppBar() {
+//-----------------------------------------------------------------------------------------------------------------------------------------------------
+//header
+PreferredSizeWidget _buildHomeAppBar() {
   return PreferredSize(
     preferredSize: const Size.fromHeight(220),
     child: Container(
@@ -76,90 +77,102 @@ class _MainHomePageState extends State<MainHomePage> {
         ),
       ),
       child: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: Stack(
           children: [
-            // Tulisan Bengkel PC
-            const Text(
-              'Bengkel PC',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 28,
-                fontWeight: FontWeight.bold,
-                letterSpacing: 1.2,
+            // Logo di tengah atas
+            Align(
+              alignment: Alignment.topCenter,
+              child: Image.asset(
+                'assets/images/logo2.png',
+                height: 100, // ukuran logo
               ),
             ),
-            const SizedBox(height: 14),
-            Row(
+            // Konten Column
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const CircleAvatar(
-                  backgroundImage: AssetImage('assets/images/example1.png'),
-                  radius: 26,
+                const Text(
+                  'Bengkel PC',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 1.2,
+                  ),
                 ),
-                const SizedBox(width: 14),
-                const Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Selamat Datang 👋',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600,
-                        ),
+                const SizedBox(height: 14),
+                Row(
+                  children: [
+                    const CircleAvatar(
+                      backgroundImage: AssetImage('assets/images/example1.png'),
+                      radius: 26,
+                    ),
+                    const SizedBox(width: 14),
+                    const Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Selamat Datang 👋',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          SizedBox(height: 4),
+                          Text(
+                            'Penuhi kebutuhan PC-mu di sini!',
+                            style: TextStyle(color: Colors.white70, fontSize: 14),
+                          ),
+                          SizedBox(height: 2),
+                          Text(
+                            'Jl. Letjen Sutoyo, Mojosongo, Solo',
+                            style: TextStyle(color: Colors.white60, fontSize: 12),
+                          ),
+                        ],
                       ),
-                      SizedBox(height: 4),
-                      Text(
-                        'Penuhi kebutuhan PC-mu di sini!',
-                        style: TextStyle(color: Colors.white70, fontSize: 14),
-                      ),
-                      SizedBox(height: 2),
-                      Text(
-                        'Jl. Letjen Sutoyo, Mojosongo, Solo',
-                        style: TextStyle(color: Colors.white60, fontSize: 12),
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        // aksi keranjang
+                      },
+                      icon: const Icon(Icons.shopping_cart_outlined,
+                          color: Colors.white, size: 28),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 16),
+                // Search Bar
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(14),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.10),
+                        blurRadius: 8,
+                        offset: const Offset(0, 4),
                       ),
                     ],
                   ),
-                ),
-                IconButton(
-                  onPressed: () {
-                    // aksi keranjang
-                  },
-                  icon: const Icon(Icons.shopping_cart_outlined,
-                      color: Colors.white, size: 28),
+                  child: TextField(
+                    controller: searchController,
+                    onChanged: (value) {
+                      setState(() {
+                        searchQuery = value.toLowerCase();
+                      });
+                    },
+                    decoration: InputDecoration(
+                      hintText: 'Cari produk terbaik untuk PC kamu...',
+                      hintStyle: const TextStyle(fontSize: 14, color: Colors.black54),
+                      prefixIcon: const Icon(Icons.search, color: Colors.grey),
+                      border: InputBorder.none,
+                      contentPadding: const EdgeInsets.symmetric(vertical: 14),
+                    ),
+                  ),
                 ),
               ],
-            ),
-            const SizedBox(height: 16),
-            // Search Bar mewah
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(14),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.10),
-                    blurRadius: 8,
-                    offset: const Offset(0, 4),
-                  ),
-                ],
-              ),
-              child: TextField(
-                controller: searchController,
-                onChanged: (value) {
-                  setState(() {
-                    searchQuery = value.toLowerCase();
-                  });
-                },
-                decoration: InputDecoration(
-                  hintText: 'Cari produk terbaik untuk PC kamu...',
-                  hintStyle: const TextStyle(fontSize: 14, color: Colors.black54),
-                  prefixIcon: const Icon(Icons.search, color: Colors.grey),
-                  border: InputBorder.none,
-                  contentPadding: const EdgeInsets.symmetric(vertical: 14),
-                ),
-              ),
             ),
           ],
         ),
@@ -168,6 +181,8 @@ class _MainHomePageState extends State<MainHomePage> {
   );
 }
 
+//header
+//---------------------------------------------------------------------------------------------------------
 
   PreferredSizeWidget _buildPageAppBar() {
     if (_selectedIndex == 4) {
@@ -179,7 +194,7 @@ class _MainHomePageState extends State<MainHomePage> {
       child: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [Colors.pinkAccent, Colors.deepPurpleAccent],
+            colors: [Color(0xFF2196F3), Color(0xFF0D47A1)],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
@@ -228,7 +243,7 @@ class _MainHomePageState extends State<MainHomePage> {
               Align(
                     alignment: Alignment.centerRight,
                     child: Image.asset(
-                      'assets/images/logo.png',
+                      'assets/images/logo2.png',
                       height: 120,
                       width: 120,
                     ),
@@ -292,35 +307,35 @@ class _MainHomePageState extends State<MainHomePage> {
           SalomonBottomBarItem(
             icon: Icon(Icons.home),
             title: Text("Home"),
-            selectedColor: Colors.pink,
+            selectedColor: Colors.blue,
           ),
 
           /// Cart
           SalomonBottomBarItem(
             icon: Icon(Icons.shopping_cart),
             title: Text("Keranjang"),
-            selectedColor: Colors.pinkAccent,
+            selectedColor: Colors.blue,
           ),
 
           /// Favorite
           SalomonBottomBarItem(
             icon: Icon(Icons.favorite),
             title: Text("Favorit"),
-            selectedColor: Colors.purpleAccent,
+            selectedColor: Colors.blue,
           ),
 
           /// Chat
           SalomonBottomBarItem(
             icon: Icon(Icons.chat),
             title: Text("Chat"),
-            selectedColor: Colors.purple,
+            selectedColor: Colors.blue,
           ),
 
           /// Profile
           SalomonBottomBarItem(
             icon: Icon(Icons.person),
             title: Text("Profil"),
-            selectedColor: Colors.orange,
+            selectedColor: Colors.blue,
           ),
         ],
       ),
@@ -432,7 +447,7 @@ class _MainHomePageState extends State<MainHomePage> {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.purpleAccent),
+        border: Border.all(color: Colors.blue),
         boxShadow: [
           BoxShadow(
             color: Colors.grey.withOpacity(0.2),
@@ -469,7 +484,7 @@ class _MainHomePageState extends State<MainHomePage> {
                 Text(
                   'Rp ${product.price}',
                   style: TextStyle(
-                    color: Colors.deepPurple,
+                    color: Colors.blue,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -490,7 +505,7 @@ class _MainHomePageState extends State<MainHomePage> {
                       },
                     ),
                     IconButton(
-                      icon: Icon(Icons.add_circle, color: Colors.purple),
+                      icon: Icon(Icons.add_circle, color: Colors.blue),
                       onPressed: () => addToCart(product),
                     ),
                   ],
@@ -549,7 +564,7 @@ class _MainHomePageState extends State<MainHomePage> {
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(12),
-                      border: Border.all(color: Colors.purpleAccent),
+                      border: Border.all(color: Colors.blueAccent),
                       boxShadow: [
                         BoxShadow(
                           color: Colors.grey.withOpacity(0.2),
@@ -589,7 +604,7 @@ class _MainHomePageState extends State<MainHomePage> {
                               Text(
                                 'Rp ${product.price}',
                                 style: TextStyle(
-                                  color: Colors.deepPurple,
+                                  color: Colors.blue,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -617,7 +632,7 @@ class _MainHomePageState extends State<MainHomePage> {
                                   IconButton(
                                     icon: Icon(
                                       Icons.add_circle,
-                                      color: Colors.purple,
+                                      color: Colors.blue,
                                     ),
                                     onPressed: () => addToCart(product),
                                   ),
@@ -695,7 +710,7 @@ class _MainHomePageState extends State<MainHomePage> {
             child: Container(
               decoration: const BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [Colors.pinkAccent, Colors.deepPurpleAccent],
+                  colors: [Color(0xFF2196F3), Color(0xFF0D47A1)],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),
@@ -733,7 +748,7 @@ class _MainHomePageState extends State<MainHomePage> {
                       Align(
                         alignment: Alignment.centerRight,
                         child: Image.asset(
-                          'assets/images/logo.png',
+                          'assets/images/logo2.png',
                           height: 120,
                           width: 120,
                         ),
@@ -801,7 +816,7 @@ class _MainHomePageState extends State<MainHomePage> {
                     'Rp ${product.price}',
                     style: const TextStyle(
                       fontSize: 20,
-                      color: Colors.deepPurple,
+                      color: Colors.blue,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -822,7 +837,7 @@ class _MainHomePageState extends State<MainHomePage> {
                             return ChoiceChip(
                               label: Text(variant),
                               selected: selected,
-                              selectedColor: Colors.purple.shade200,
+                              selectedColor: Colors.blue.shade200,
                               onSelected: (value) {
                                 setState(() {
                                   selectedVariant = variant;
@@ -1042,7 +1057,7 @@ class _MainHomePageState extends State<MainHomePage> {
                                             255,
                                             255,
                                           )
-                                          : Colors.deepPurple,
+                                          : Colors.blue,
                                   minimumSize: Size(double.infinity, 50),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(30),
@@ -1215,7 +1230,7 @@ class _MainHomePageState extends State<MainHomePage> {
             ),
             leading: CircleAvatar(
               radius: 24,
-              backgroundColor: Colors.deepPurple.shade100,
+              backgroundColor: Colors.blue.shade100,
               child: Text(
                 name[0].toUpperCase(),
                 style: const TextStyle(
@@ -1246,6 +1261,9 @@ class _MainHomePageState extends State<MainHomePage> {
       ),
     );
   }
+
+//header profil ------------------------------------------------------------------------------------
+
 Widget buildProfilePage(void Function(int index) onNavigate) {
   bool isNotifikasiOn = true;
 
@@ -1257,7 +1275,7 @@ Widget buildProfilePage(void Function(int index) onNavigate) {
           child: Container(
             decoration: const BoxDecoration(
               gradient: LinearGradient(
-                colors: [Colors.orange, Colors.pinkAccent],
+                colors: [Color(0xFF2196F3), Color(0xFF0D47A1)],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),
@@ -1286,7 +1304,7 @@ Widget buildProfilePage(void Function(int index) onNavigate) {
                     const Align(
                       alignment: Alignment.centerRight,
                       child: Image(
-                        image: AssetImage('assets/images/logo.png'),
+                        image: AssetImage('assets/images/logo2.png'),
                         height: 120,
                         width: 120,
                       ),
@@ -1297,6 +1315,10 @@ Widget buildProfilePage(void Function(int index) onNavigate) {
             ),
           ),
         ),
+
+//header profil-------------------------------------------------------------------------------
+
+//isi profil
         backgroundColor: Colors.white,
         body: ListView(
           padding: const EdgeInsets.all(16.0),
@@ -1323,11 +1345,11 @@ Widget buildProfilePage(void Function(int index) onNavigate) {
 
             // Menu List
             ListTile(
-              leading: const Icon(Icons.notifications, color: Colors.pink),
+              leading: const Icon(Icons.notifications, color: Colors.black),
               title: const Text('Notifikasi'),
               trailing: Switch(
                 value: isNotifikasiOn,
-                activeColor: Colors.pinkAccent,
+                activeColor: Colors.blue,
                 onChanged: (val) {
                   setState(() {
                     isNotifikasiOn = val;
@@ -1336,7 +1358,7 @@ Widget buildProfilePage(void Function(int index) onNavigate) {
               ),
             ),
             ListTile(
-              leading: const Icon(Icons.person, color: Colors.orange),
+              leading: const Icon(Icons.person, color: Colors.black),
               title: const Text('Lihat Profil'),
               trailing: const Icon(Icons.chevron_right),
               onTap: () {
@@ -1355,7 +1377,7 @@ Widget buildProfilePage(void Function(int index) onNavigate) {
               },
             ),
             ListTile(
-              leading: const Icon(Icons.shopping_cart, color: Colors.amber),
+              leading: const Icon(Icons.shopping_cart, color: Colors.black),
               title: const Text('Keranjang'),
               trailing: const Icon(Icons.chevron_right),
               onTap: () {
@@ -1363,7 +1385,7 @@ Widget buildProfilePage(void Function(int index) onNavigate) {
               },
             ),
             ListTile(
-              leading: Icon(Icons.help, color: Colors.yellow[800]),
+              leading: Icon(Icons.help, color: Colors.black),
               title: const Text('Pusat Bantuan'),
               trailing: const Icon(Icons.chevron_right),
               onTap: () {
@@ -1380,6 +1402,7 @@ Widget buildProfilePage(void Function(int index) onNavigate) {
   );
 }
 
+//isi profil----------------------
 
   Widget buildPaymentPage() {
     String selectedMethod = 'COD';
@@ -1400,7 +1423,7 @@ Widget buildProfilePage(void Function(int index) onNavigate) {
             child: Container(
               decoration: const BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [Colors.pinkAccent, Colors.deepPurpleAccent],
+                  colors: [Color(0xFF2196F3), Color(0xFF0D47A1)],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),
@@ -1534,7 +1557,7 @@ Widget buildProfilePage(void Function(int index) onNavigate) {
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.purple,
+                    backgroundColor: Colors.blue,  //tombol lanjutkan pembayaran dan pesan sekarang
                     minimumSize: Size(double.infinity, 50), // tombol full width
                   ),
                   child: Text(
@@ -1567,8 +1590,10 @@ Widget buildProfilePage(void Function(int index) onNavigate) {
           decoration: const BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                Color.fromARGB(255, 23, 126, 0),
-                Color.fromARGB(255, 2, 167, 84),
+                Color(0xFF2196F3),
+                Color(0xFF0D47A1),
+                
+          
               ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
