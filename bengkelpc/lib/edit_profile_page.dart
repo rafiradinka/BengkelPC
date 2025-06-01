@@ -22,7 +22,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
         child: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
-              colors: [Colors.orange, Colors.pinkAccent],
+              colors: [Color(0xFF2196F3), Color(0xFF0D47A1)],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
@@ -59,7 +59,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   Align(
                     alignment: Alignment.centerRight,
                     child: Image.asset(
-                      'assets/images/logo.png',
+                      'assets/images/logo2.png',
                       height: 120,
                       width: 120,
                     ),
@@ -89,7 +89,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 Navigator.pop(context);
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.pinkAccent,
+                backgroundColor: Colors.blue,
                 padding: const EdgeInsets.symmetric(vertical: 16),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
               ),

@@ -76,7 +76,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
         child: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
-              colors: [Colors.pinkAccent, Colors.deepPurpleAccent],
+              colors: [Color(0xFF2196F3), Color(0xFF0D47A1)],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),

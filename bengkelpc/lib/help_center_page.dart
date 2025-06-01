@@ -20,7 +20,7 @@ class HelpCenterPage extends StatelessWidget {
   child: Container(
     decoration: const BoxDecoration(
       gradient: LinearGradient(
-        colors: [Colors.orange, Colors.pinkAccent],
+        colors: [Color(0xFF2196F3), Color(0xFF0D47A1)],
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
       ),
@@ -60,7 +60,7 @@ class HelpCenterPage extends StatelessWidget {
             Align(
               alignment: Alignment.centerRight,
               child: Image.asset(
-                'assets/images/logo.png',
+                'assets/images/logo2.png',
                 height: 120,
                 width: 120,
               ),
@@ -93,7 +93,7 @@ class HelpCenterPage extends StatelessWidget {
             label: Text("Hubungi Admin",style: TextStyle(color: Colors.white)),
             style: ElevatedButton.styleFrom(
               
-              backgroundColor: Colors.orange,
+              backgroundColor: Colors.blue,
               padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
             ),
