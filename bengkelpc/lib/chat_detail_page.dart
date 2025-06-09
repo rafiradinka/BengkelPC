@@ -116,7 +116,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
                   Align(
                     alignment: Alignment.centerRight,
                     child: Image.asset(
-                      'assets/images/logo.png',
+                      'assets/images/logo2.png',
                       height: 120,
                       width: 120,
                     ),

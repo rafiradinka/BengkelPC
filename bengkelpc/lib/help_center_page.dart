@@ -5,7 +5,7 @@ import 'chat_detail_page.dart';
 class HelpCenterPage extends StatelessWidget {
   final List<Map<String, String>> faqs = [
     // {"question":"","answer":""},
-    {"question":"Apa itu aplikasi MartDoora?","answer":"aplikasi MartDoora adalah platform digital untuk mempermudah pengelolaan penjualan,stok dan transaksi di toko kelontong atau toko madura."},
+    {"question":"Apa itu aplikasi BengkelPC?","answer":"aplikasi BengkelPC adalah platform digital untuk mempermudah pengelolaan penjualan,stok dan transaksi di toko sparepart PC."},
     {"question": "Bagaimana cara belanja?", "answer": "Pilih Produk, klik keranjang, lalu lakukan checkout"},
     {"question": "Apakah aplikasi ini mendukung pembayaran digital?", "answer": "saat ini belum tersedia fitur pembayaran digital seperti kartu kredit, debit, dan e-wallet, tetapi pembeli dapat melakukan pemesanan terlebih dahulu lalu membayar secara COD di toko secara offline."},
     {"question":"Bagaimana jika saya lupa password?","answer":"Anda bisa menghubungi admin melalui fitur chat atau bertanya langsung dengan penjual secara offline"},
