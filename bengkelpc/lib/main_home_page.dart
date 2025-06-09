@@ -8,6 +8,7 @@ import 'chat_detail_page.dart';
 import 'help_center_page.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'edit_profile_page.dart';
+import 'banner_carousel.dart';
 
 class MainHomePage extends StatefulWidget {
   final String role;
@@ -62,7 +63,7 @@ class _MainHomePageState extends State<MainHomePage> {
 //header
 PreferredSizeWidget _buildHomeAppBar() {
   return PreferredSize(
-    preferredSize: const Size.fromHeight(220),
+    preferredSize: const Size.fromHeight(260), // tambahkan tinggi agar muat
     child: Container(
       padding: const EdgeInsets.all(16),
       decoration: const BoxDecoration(
@@ -77,108 +78,89 @@ PreferredSizeWidget _buildHomeAppBar() {
         ),
       ),
       child: SafeArea(
-        child: Stack(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Logo di tengah atas
-            Align(
-              alignment: Alignment.topCenter,
-              child: Image.asset(
-                'assets/images/logo2.png',
-                height: 100, // ukuran logo
-              ),
-            ),
-            // Konten Column
-            Column(
+            const SizedBox(height: 12),
+            Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'Bengkel PC',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 1.2,
-                  ),
+                const CircleAvatar(
+                  backgroundImage: AssetImage('assets/images/example1.png'),
+                  radius: 26,
                 ),
-                const SizedBox(height: 14),
-                Row(
-                  children: [
-                    const CircleAvatar(
-                      backgroundImage: AssetImage('assets/images/example1.png'),
-                      radius: 26,
-                    ),
-                    const SizedBox(width: 14),
-                    const Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Selamat Datang 👋',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          SizedBox(height: 4),
-                          Text(
-                            'Penuhi kebutuhan PC-mu di sini!',
-                            style: TextStyle(color: Colors.white70, fontSize: 14),
-                          ),
-                          SizedBox(height: 2),
-                          Text(
-                            'Jl. Letjen Sutoyo, Mojosongo, Solo',
-                            style: TextStyle(color: Colors.white60, fontSize: 12),
-                          ),
-                        ],
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      Text(
+                        'Selamat Datang di BengkelPC 👋',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
-                    ),
-                    IconButton(
-                      onPressed: () {
-                        // aksi keranjang
-                      },
-                      icon: const Icon(Icons.shopping_cart_outlined,
-                          color: Colors.white, size: 28),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 16),
-                // Search Bar
-                Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(14),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.10),
-                        blurRadius: 8,
-                        offset: const Offset(0, 4),
+                      SizedBox(height: 4),
+                      Text(
+                        'Penuhi kebutuhan PC-mu di sini!',
+                        style: TextStyle(color: Colors.white70, fontSize: 14),
+                      ),
+                      SizedBox(height: 2),
+                      Text(
+                        'Jl. Letjen Sutoyo, Mojosongo, Solo',
+                        style: TextStyle(color: Colors.white60, fontSize: 12),
                       ),
                     ],
                   ),
-                  child: TextField(
-                    controller: searchController,
-                    onChanged: (value) {
-                      setState(() {
-                        searchQuery = value.toLowerCase();
-                      });
-                    },
-                    decoration: InputDecoration(
-                      hintText: 'Cari produk terbaik untuk PC kamu...',
-                      hintStyle: const TextStyle(fontSize: 14, color: Colors.black54),
-                      prefixIcon: const Icon(Icons.search, color: Colors.grey),
-                      border: InputBorder.none,
-                      contentPadding: const EdgeInsets.symmetric(vertical: 14),
-                    ),
-                  ),
+                ),
+                const SizedBox(width: 8),
+                // Gambar logo kecil agar tidak overflow
+                Image.asset(
+                  'assets/images/logo2.png',
+                  height: 120,
+                  width: 120,
+                  fit: BoxFit.contain,
                 ),
               ],
+            ),
+            const SizedBox(height: 16),
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(14),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.10),
+                    blurRadius: 8,
+                    offset: const Offset(0, 4),
+                  ),
+                ],
+              ),
+              child: TextField(
+                controller: searchController,
+                onChanged: (value) {
+                  setState(() {
+                    searchQuery = value.toLowerCase();
+                  });
+                },
+                decoration: const InputDecoration(
+                  hintText: 'Cari produk terbaik untuk PC kamu...',
+                  hintStyle: TextStyle(fontSize: 14, color: Colors.black54),
+                  prefixIcon: Icon(Icons.search, color: Colors.grey),
+                  border: InputBorder.none,
+                  contentPadding: EdgeInsets.symmetric(vertical: 14),
+                ),
+              ),
             ),
           ],
         ),
       ),
     ),
   );
+
+
 }
 
 //header
@@ -343,85 +325,180 @@ PreferredSizeWidget _buildHomeAppBar() {
   }
 
   // Home Page
-  Widget buildHomePage() {
-    // Gabungkan semua produk jadi satu list
-    List<Product> allProducts = [
-      ...cpuList,
-      ...ramList,
-      ...motherboardList,
-      ...gpuList,
-      ...ssdList,
-      ...psuList,
-      ...caseList,
-      ...coolerList,
-    ];
+  // Ganti fungsi buildHomePage() di MainHomePageState dengan kode ini:
 
-    // Filter berdasarkan search query
-    List<Product> filtered =
-        searchQuery.isEmpty
-            ? []
-            : allProducts
-                .where(
-                  (product) => product.name.toLowerCase().contains(searchQuery),
-                )
-                .toList();
+Widget buildHomePage() {
+  // Gabungkan semua produk jadi satu list
+  List<Product> allProducts = [
+    ...cpuList,
+    ...ramList,
+    ...motherboardList,
+    ...gpuList,
+    ...ssdList,
+    ...psuList,
+    ...caseList,
+    ...coolerList,
+  ];
 
-    if (searchQuery.isNotEmpty) {
-      // Jika user sedang mencari sesuatu
-      return SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                "Hasil pencarian untuk: \"$searchQuery\"",
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-            ),
-            if (filtered.isEmpty)
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text("Produk tidak ditemukan."),
+  // Filter berdasarkan search query
+  List<Product> filtered =
+      searchQuery.isEmpty
+          ? []
+          : allProducts
+              .where(
+                (product) => product.name.toLowerCase().contains(searchQuery),
               )
-            else
-              SizedBox(
-                height: 260, // Samakan dengan tinggi card di homepage
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: filtered.length,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: SizedBox(
-                        width: 160, // Samakan dengan homepage
-                        child: buildProductCard(filtered[index]),
-                      ),
-                    );
-                  },
-                ),
-              ),
-          ],
-        ),
-      );
-    }
-    // Kalau tidak sedang mencari → tampilkan kategori biasa
+              .toList();
+
+  if (searchQuery.isNotEmpty) {
+    // Jika user sedang mencari sesuatu
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildCategorySection('CPU', cpuList),
-          buildCategorySection('RAM', ramList),
-          buildCategorySection('Motherboard', motherboardList),
-          buildCategorySection('GPU', gpuList),
-          buildCategorySection('SSD', ssdList),
-          buildCategorySection('PSU', psuList),
-          buildCategorySection('Case', caseList),
-          buildCategorySection('Cooler', coolerList),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              "Hasil pencarian untuk: \"$searchQuery\"",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+          ),
+          if (filtered.isEmpty)
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text("Produk tidak ditemukan."),
+            )
+          else
+            SizedBox(
+              height: 260, // Samakan dengan tinggi card di homepage
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: filtered.length,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: SizedBox(
+                      width: 160, // Samakan dengan homepage
+                      child: buildProductCard(filtered[index]),
+                    ),
+                  );
+                },
+              ),
+            ),
         ],
       ),
     );
   }
+
+  // Kalau tidak sedang mencari → tampilkan banner carousel + kategori biasa
+  return SingleChildScrollView(
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // Banner Carousel di bagian atas
+        const BannerCarousel(),
+        
+        // Quick Action Buttons (opsional)
+        _buildQuickActions(),
+        
+        // Kategori produk
+        buildCategorySection('CPU', cpuList),
+        buildCategorySection('RAM', ramList),
+        buildCategorySection('Motherboard', motherboardList),
+        buildCategorySection('GPU', gpuList),
+        buildCategorySection('SSD', ssdList),
+        buildCategorySection('PSU', psuList),
+        buildCategorySection('Case', caseList),
+        buildCategorySection('Cooler', coolerList),
+      ],
+    ),
+  );
+}
+
+// Widget tambahan untuk quick actions (opsional)
+Widget _buildQuickActions() {
+  return Container(
+    margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          'Layanan Kami',
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            color: Colors.black87,
+          ),
+        ),
+        const SizedBox(height: 12),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            _buildQuickActionItem(
+              icon: Icons.build,
+              title: 'Build PC',
+              color: Colors.blue,
+            ),
+            _buildQuickActionItem(
+              icon: Icons.help_center,
+              title: 'Konsultasi',
+              color: Colors.green,
+            ),
+            _buildQuickActionItem(
+              icon: Icons.delivery_dining,
+              title: 'Antar Gratis',
+              color: Colors.orange,
+            ),
+            _buildQuickActionItem(
+              icon: Icons.support_agent,
+              title: 'Support 24/7',
+              color: Colors.purple,
+            ),
+          ],
+        ),
+        const SizedBox(height: 16),
+      ],
+    ),
+  );
+}
+
+Widget _buildQuickActionItem({
+  required IconData icon,
+  required String title,
+  required Color color,
+}) {
+  return Column(
+    children: [
+      Container(
+        width: 60,
+        height: 60,
+        decoration: BoxDecoration(
+          color: color.withOpacity(0.1),
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(
+            color: color.withOpacity(0.3),
+            width: 1,
+          ),
+        ),
+        child: Icon(
+          icon,
+          color: color,
+          size: 28,
+        ),
+      ),
+      const SizedBox(height: 8),
+      Text(
+        title,
+        style: TextStyle(
+          fontSize: 12,
+          fontWeight: FontWeight.w500,
+          color: Colors.black87,
+        ),
+        textAlign: TextAlign.center,
+      ),
+    ],
+  );
+}
 
   Widget buildProductGrid(List<Product> items) {
     return GridView.builder(
@@ -658,41 +735,7 @@ PreferredSizeWidget _buildHomeAppBar() {
 
     // Map varian berdasarkan produk
     final Map<String, List<String>> productVariants = {
-      // 🍟 Makanan
-      'Taro': ['Seaweed', 'Barbeque'],
-      'Malkist': ['Keju', 'Coklat'],
-      'Jetz Stick': ['Chocolate', 'Strawberry'],
-      'Chitato': ['Sapi Panggang', 'Keju'],
-      'Qtela': ['Singkong Asin', 'Balado'],
-      'TicTac': ['Jagung Manis', 'Keju'],
-      'Choki Choki': ['Coklat Original', 'Kacang'],
-      'Oreo': ['Original', 'Vanilla Cream'],
-      'Beng Beng': ['Original', 'Extra Crunch'],
-      'Good Time': ['Coklat Chip', 'Kacang'],
-
-      // 🥤 Minuman
-      'Cap Kaki Tiga': ['Original', 'Jambu'],
-      'NutriSari': ['Jeruk', 'Mangga', 'Leci'],
-      'Ultra Milk': ['Coklat', 'Strawberry', 'Plain'],
-      'Teh Pucuk': ['Original', 'Jasmine'],
-      'Aqua': [], // air mineral, tidak ada varian
-      'Floridina': ['Jeruk', 'Lemon'],
-      'Mizone': ['Lychee Lemon', 'Strawberry'],
-      'You C 1000': ['Lemon', 'Orange'],
-      'Fruit Tea': ['Apel', 'Blackcurrant'],
-      'Teh Botol': ['Original', 'Less Sugar'],
-
-      // 🍚 Sembako
-      'Minyak Goreng': [],
-      'Tepung Segitiga': [],
-      'Teh Celup Sosro': ['Original', 'Jasmine'],
-      'Gula Pasir': [],
-      'Beras Pandan': ['Pulen', 'Aromatik'],
-      'Kecap ABC': ['Manis', 'Asin'],
-      'Garam Dapur': [],
-      'Susu Bubuk': ['Full Cream', 'Coklat'],
-      'Sarden ABC': ['Original', 'Pedas'],
-      'Minyak Wijen': ['Original', 'Roasted'],
+      'NamaProductX' :['varian1', 'varian2'], 
     };
 
     List<String> variants = productVariants[product.name] ?? [];
@@ -1649,7 +1692,7 @@ Widget buildProfilePage(void Function(int index) onNavigate) {
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 20),
-              Text('Alamat Toko: Jl. Letjen Sutoyo, Mojosongo, Solo'),
+              Text('Alamat Toko: Jl. Letjen Sutoyo, Wirobrajan, Yogyakarta'),
               Text('Total Pembayaran: Rp $totalBayar'),
               Text('Metode Pembayaran: $metodePembayaran'),
               Text('Total Pesanan: $totalItems item'),

@@ -8,11 +8,11 @@ class EditProfilePage extends StatefulWidget {
 }
 
 class _EditProfilePageState extends State<EditProfilePage> {
-  final TextEditingController nameController = TextEditingController(text: "Khoirunnisa");
-  final TextEditingController genderController = TextEditingController(text: "Perempuan");
-  final TextEditingController ageController = TextEditingController(text: "20 Tahun");
-  final TextEditingController phoneController = TextEditingController(text: "08575148296");
-  final TextEditingController emailController = TextEditingController(text: "khoirunnisa@gmail.com");
+  final TextEditingController nameController = TextEditingController(text: "Diva Sigmaboy");
+  final TextEditingController genderController = TextEditingController(text: "Laki-Laki");
+  final TextEditingController ageController = TextEditingController(text: "21 Tahun");
+  final TextEditingController phoneController = TextEditingController(text: "08889999888");
+  final TextEditingController emailController = TextEditingController(text: "DivaAhooy@gmail.com");
 
   @override
   Widget build(BuildContext context) {
