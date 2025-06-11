@@ -109,7 +109,7 @@ PreferredSizeWidget _buildHomeAppBar() {
                       ),
                       SizedBox(height: 2),
                       Text(
-                        'Jl. Letjen Sutoyo, Mojosongo, Solo',
+                        'Jl. Letjen Sutoyo, Bantul, Yogyakarta',
                         style: TextStyle(color: Colors.white60, fontSize: 12),
                       ),
                     ],
@@ -247,7 +247,7 @@ PreferredSizeWidget _buildHomeAppBar() {
       case 3:
         return 'Chat';
       case 4:
-        return ''; // kosong karena pakai AppBar khusus
+        return ''; 
       default:
         return '';
     }
@@ -260,9 +260,9 @@ PreferredSizeWidget _buildHomeAppBar() {
       case 1:
       case 2:
       case 3:
-        return _buildPageAppBar(); // Gunakan gradient + title di tengah
+        return _buildPageAppBar(); 
       case 4:
-        return null; // Profil punya AppBar sendiri di widgetnya
+        return null; 
       default:
         return null;
     }
@@ -325,10 +325,8 @@ PreferredSizeWidget _buildHomeAppBar() {
   }
 
   // Home Page
-  // Ganti fungsi buildHomePage() di MainHomePageState dengan kode ini:
 
 Widget buildHomePage() {
-  // Gabungkan semua produk jadi satu list
   List<Product> allProducts = [
     ...cpuList,
     ...ramList,
@@ -340,7 +338,6 @@ Widget buildHomePage() {
     ...coolerList,
   ];
 
-  // Filter berdasarkan search query
   List<Product> filtered =
       searchQuery.isEmpty
           ? []
@@ -351,7 +348,6 @@ Widget buildHomePage() {
               .toList();
 
   if (searchQuery.isNotEmpty) {
-    // Jika user sedang mencari sesuatu
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -370,7 +366,7 @@ Widget buildHomePage() {
             )
           else
             SizedBox(
-              height: 260, // Samakan dengan tinggi card di homepage
+              height: 260, 
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemCount: filtered.length,
@@ -378,7 +374,7 @@ Widget buildHomePage() {
                   return Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: SizedBox(
-                      width: 160, // Samakan dengan homepage
+                      width: 160, 
                       child: buildProductCard(filtered[index]),
                     ),
                   );
@@ -390,15 +386,15 @@ Widget buildHomePage() {
     );
   }
 
-  // Kalau tidak sedang mencari → tampilkan banner carousel + kategori biasa
+//tampilkan banner carousel
   return SingleChildScrollView(
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Banner Carousel di bagian atas
+        // Banner Carousel bagian atas
         const BannerCarousel(),
         
-        // Quick Action Buttons (opsional)
+        // Quick Action Buttons 
         _buildQuickActions(),
         
         // Kategori produk
@@ -415,7 +411,7 @@ Widget buildHomePage() {
   );
 }
 
-// Widget tambahan untuk quick actions (opsional)
+// Widget tambahan
 Widget _buildQuickActions() {
   return Container(
     margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -597,7 +593,6 @@ Widget _buildQuickActionItem({
 
   // Helper untuk kategori
   Widget buildCategorySection(String title, List<Product> items) {
-    // Tambahkan filter berdasarkan searchQuery
     List<Product> filteredItems =
         searchQuery.isEmpty
             ? items
@@ -605,7 +600,6 @@ Widget _buildQuickActionItem({
                 .where((item) => item.name.toLowerCase().contains(searchQuery))
                 .toList();
 
-    // Jika hasil pencarian kosong untuk kategori ini, sembunyikan
     if (filteredItems.isEmpty) return SizedBox.shrink();
 
     return Column(
@@ -733,7 +727,6 @@ Widget _buildQuickActionItem({
   Widget buildProductDetailPage(Product product) {
     int quantity = product.quantity > 0 ? product.quantity : 1;
 
-    // Map varian berdasarkan produk
     final Map<String, List<String>> productVariants = {
       'NamaProductX' :['varian1', 'varian2'], 
     };
@@ -1000,224 +993,686 @@ Widget _buildQuickActionItem({
     );
   }
 
-  Widget buildCartPage() {
-    int total = 0;
-    for (var item in cart) {
-      total += item.price * item.quantity;
-    }
+ Widget buildCartPage() {
+  int total = 0;
+  for (var item in cart) {
+    total += item.price * item.quantity;
+  }
 
-    return Scaffold(
-      body:
-          cart.isEmpty
-              ? Center(
-                child: Text(
-                  'Keranjang kosong',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+  return Scaffold(
+    backgroundColor: const Color(0xFFF5F5F5),
+    body: cart.isEmpty
+        ? Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.shopping_cart_outlined,
+                  size: 80,
+                  color: Colors.grey[400],
                 ),
-              )
-              : Column(
-                children: [
-                  Expanded(
-                    child: ListView.separated(
-                      itemCount: cart.length,
-                      separatorBuilder:
-                          (_, __) => Divider(), // <== Tambah garis
-                      itemBuilder: (contextList, index) {
-                        var item = cart[index];
-                        return ListTile(
-                          leading: Image.asset(
-                            'assets/images/${item.name.split(' (')[0].toLowerCase().replaceAll(' ', '_')}.png',
-                            width: 50,
-                            height: 50,
-                            fit: BoxFit.cover,
-                          ),
-                          title: Text(item.name),
-                          subtitle: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              if (item.selectedVariant != null)
-                                Text('Varian: ${item.selectedVariant}'),
-                              Text('Rp ${item.price} x ${item.quantity}'),
-                            ],
-                          ),
-                          trailing: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              IconButton(
-                                icon: Icon(
-                                  Icons.remove_circle,
-                                  color: Colors.red,
-                                ),
-                                onPressed: () => removeFromCart(item),
-                              ),
-                              IconButton(
-                                icon: Icon(
-                                  Icons.add_circle,
-                                  color: Colors.green,
-                                ),
-                                onPressed: () => addToCart(item),
-                              ),
-                            ],
-                          ),
-                        );
-                      },
-                    ),
+                SizedBox(height: 16),
+                Text(
+                  'Keranjang kosong',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.grey[600],
                   ),
-                  Container(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Builder(
-                      builder:
-                          (context) => Column(
+                ),
+                SizedBox(height: 8),
+                Text(
+                  'Mulai belanja sekarang!',
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Colors.grey[500],
+                  ),
+                ),
+              ],
+            ),
+          )
+        : Column(
+            children: [
+              // Header info
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(16),
+                margin: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: Colors.blue[50],
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(color: Colors.blue[100]!),
+                ),
+                child: Row(
+                  children: [
+                    Icon(Icons.info_outline, color: Colors.blue[600], size: 20),
+                    SizedBox(width: 8),
+                    Text(
+                      '${cart.length} item dalam keranjang',
+                      style: TextStyle(
+                        color: Colors.blue[700],
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              
+              Expanded(
+                child: ListView.builder(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  itemCount: cart.length,
+                  itemBuilder: (contextList, index) {
+                    var item = cart[index];
+                    return Container(
+                      margin: const EdgeInsets.only(bottom: 12),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(12),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.1),
+                            spreadRadius: 1,
+                            blurRadius: 4,
+                            offset: Offset(0, 2),
+                          ),
+                        ],
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(12),
+                        child: Row(
+                          children: [
+                            // Product Image
+                            Container(
+                              width: 60,
+                              height: 60,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                color: Colors.grey[100],
+                              ),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(8),
+                                child: Image.asset(
+                                  'assets/images/${item.name.split(' (')[0].toLowerCase().replaceAll(' ', '_')}.png',
+                                  width: 60,
+                                  height: 60,
+                                  fit: BoxFit.cover,
+                                  errorBuilder: (context, error, stackTrace) {
+                                    return Container(
+                                      color: Colors.grey[200],
+                                      child: Icon(
+                                        Icons.image_not_supported,
+                                        color: Colors.grey[400],
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                            ),
+                            
+                            SizedBox(width: 12),
+                            
+                            // Product Info
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    item.name,
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.grey[800],
+                                    ),
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                  SizedBox(height: 4),
+                                  if (item.selectedVariant != null)
+                                    Container(
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 8,
+                                        vertical: 2,
+                                      ),
+                                      decoration: BoxDecoration(
+                                        color: Colors.orange[50],
+                                        borderRadius: BorderRadius.circular(4),
+                                        border: Border.all(
+                                          color: Colors.orange[200]!,
+                                          width: 0.5,
+                                        ),
+                                      ),
+                                      child: Text(
+                                        'Varian: ${item.selectedVariant}',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          color: Colors.orange[700],
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                    ),
+                                  SizedBox(height: 4),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        'Rp ${item.price.toString().replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]}.')}',
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.blue[600],
+                                        ),
+                                      ),
+                                      Text(
+                                        ' x ${item.quantity}',
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          color: Colors.grey[600],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                            
+                            // Quantity Controls
+                            Container(
+                              decoration: BoxDecoration(
+                                color: Colors.grey[50],
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Container(
+                                    width: 36,
+                                    height: 36,
+                                    child: IconButton(
+                                      padding: EdgeInsets.zero,
+                                      icon: Icon(
+                                        Icons.remove,
+                                        color: Colors.red[400],
+                                        size: 20,
+                                      ),
+                                      onPressed: () => removeFromCart(item),
+                                    ),
+                                  ),
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                                    child: Text(
+                                      '${item.quantity}',
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 36,
+                                    height: 36,
+                                    child: IconButton(
+                                      padding: EdgeInsets.zero,
+                                      icon: Icon(
+                                        Icons.add,
+                                        color: Colors.green[400],
+                                        size: 20,
+                                      ),
+                                      onPressed: () => addToCart(item),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+              
+              // Bottom Section
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20),
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.2),
+                      spreadRadius: 1,
+                      blurRadius: 8,
+                      offset: Offset(0, -2),
+                    ),
+                  ],
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Builder(
+                    builder: (context) => Column(
+                      children: [
+                        // Total Section
+                        Container(
+                          padding: const EdgeInsets.all(16),
+                          decoration: BoxDecoration(
+                            color: Colors.blue[50],
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(color: Colors.blue[100]!),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                'Total Harga: Rp $total',
+                                'Total Pembayaran',
                                 style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.grey[700],
                                 ),
                               ),
-                              SizedBox(height: 10),
-                              ElevatedButton(
-                                onPressed:
-                                    cart.isEmpty
-                                        ? null
-                                        : () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder:
-                                                  (context) =>
-                                                      buildPaymentPage(),
-                                            ),
-                                          );
-                                        },
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor:
-                                      cart.isEmpty
-                                          ? const Color.fromARGB(
-                                            255,
-                                            255,
-                                            255,
-                                            255,
-                                          )
-                                          : Colors.blue,
-                                  minimumSize: Size(double.infinity, 50),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(30),
-                                  ),
+                              Text(
+                                'Rp ${total.toString().replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]}.')}',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.blue[700],
                                 ),
-                                child: Text(
+                              ),
+                            ],
+                          ),
+                        ),
+                        
+                        SizedBox(height: 16),
+                        
+                        // Payment Button
+                        Container(
+                          width: double.infinity,
+                          height: 50,
+                          child: ElevatedButton(
+                            onPressed: cart.isEmpty
+                                ? null
+                                : () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => buildPaymentPage(),
+                                      ),
+                                    );
+                                  },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: cart.isEmpty
+                                  ? Colors.grey[300]
+                                  : Colors.blue[600],
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              elevation: cart.isEmpty ? 0 : 2,
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.payment,
+                                  color: Colors.white,
+                                  size: 20,
+                                ),
+                                SizedBox(width: 8),
+                                Text(
                                   'Lanjutkan Pembayaran',
                                   style: TextStyle(
-                                    fontSize: 18,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
                                     color: Colors.white,
                                   ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
+                        ),
+                      ],
                     ),
                   ),
-                ],
+                ),
               ),
-    );
-  }
+            ],
+          ),
+  );
+}
 
   Widget buildFavoritePage() {
-    var favorites =
-        [
-          ...cpuList,
-      ...ramList,
-      ...motherboardList,
-      ...gpuList,
-      ...ssdList,
-      ...psuList,
-      ...caseList,
-      ...coolerList,
-        ].where((product) => product.isFavorite).toList();
+  var favorites = [
+    ...cpuList,
+    ...ramList,
+    ...motherboardList,
+    ...gpuList,
+    ...ssdList,
+    ...psuList,
+    ...caseList,
+    ...coolerList,
+  ].where((product) => product.isFavorite).toList();
 
-    return favorites.isEmpty
-        ? Center(child: Text('Belum ada produk favorit', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),))
-        : ListView.separated(
-          itemCount: favorites.length,
-          separatorBuilder: (_, __) => Divider(), // <== Tambah garis
-          itemBuilder: (context, index) {
-            var item = favorites[index];
-            var inCart = cart.firstWhere(
-              (c) =>
-                  c.name == item.name &&
-                  c.selectedVariant == item.selectedVariant,
-              orElse: () => Product(name: '', price: 0),
-            );
-
-            int quantityInCart = inCart.name != '' ? inCart.quantity : 0;
-
-            return ListTile(
-              leading: Image.asset(
-                'assets/images/${item.name.toLowerCase().replaceAll(' ', '_')}.png',
-                width: 50,
-                height: 50,
-                fit: BoxFit.cover,
-              ),
-              title: Text(item.name),
-              subtitle: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  if (item.selectedVariant != null)
-                    Text('Varian: ${item.selectedVariant}'),
-                  Text('Di Keranjang: $quantityInCart item'),
-                ],
-              ),
-              trailing: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  IconButton(
-                    icon: Icon(Icons.remove_circle, color: Colors.red),
-                    onPressed: () {
-                      setState(() {
-                        if (inCart.name != '' && inCart.quantity > 0) {
-                          inCart.quantity--;
-                          if (inCart.quantity == 0) {
-                            cart.remove(inCart);
-                          }
-                        }
-                      });
-                    },
+  return Container(
+    color: const Color(0xFFF5F5F5),
+    child: favorites.isEmpty
+        ? Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.favorite_outline,
+                  size: 80,
+                  color: Colors.grey[400],
+                ),
+                SizedBox(height: 16),
+                Text(
+                  'Belum ada produk favorit',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.grey[600],
                   ),
-                  IconButton(
-                    icon: Icon(Icons.add_circle, color: Colors.green),
-                    onPressed: () {
-                      setState(() {
-                        if (inCart.name == '') {
-                          cart.add(
-                            Product(
-                              name: item.name,
-                              price: item.price,
-                              quantity: 1,
-                              selectedVariant:
-                                  item.selectedVariant ?? 'Original',
+                ),
+                SizedBox(height: 8),
+                Text(
+                  'Mulai tambahkan produk ke favorit!',
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Colors.grey[500],
+                  ),
+                ),
+              ],
+            ),
+          )
+        : Column(
+            children: [
+              // Header info
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(16),
+                margin: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: Colors.pink[50],
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(color: Colors.pink[100]!),
+                ),
+                child: Row(
+                  children: [
+                    Icon(Icons.favorite, color: Colors.pink[600], size: 20),
+                    SizedBox(width: 8),
+                    Text(
+                      '${favorites.length} produk favorit',
+                      style: TextStyle(
+                        color: Colors.pink[700],
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              Expanded(
+                child: ListView.builder(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  itemCount: favorites.length,
+                  itemBuilder: (context, index) {
+                    var item = favorites[index];
+                    var inCart = cart.firstWhere(
+                      (c) =>
+                          c.name == item.name &&
+                          c.selectedVariant == item.selectedVariant,
+                      orElse: () => Product(name: '', price: 0),
+                    );
+
+                    int quantityInCart = inCart.name != '' ? inCart.quantity : 0;
+
+                    return Container(
+                      margin: const EdgeInsets.only(bottom: 12),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(12),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.1),
+                            spreadRadius: 1,
+                            blurRadius: 4,
+                            offset: Offset(0, 2),
+                          ),
+                        ],
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(12),
+                        child: Row(
+                          children: [
+                            // Product Image
+                            Container(
+                              width: 60,
+                              height: 60,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                color: Colors.grey[100],
+                              ),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(8),
+                                child: Image.asset(
+                                  'assets/images/${item.name.toLowerCase().replaceAll(' ', '_')}.png',
+                                  width: 60,
+                                  height: 60,
+                                  fit: BoxFit.cover,
+                                  errorBuilder: (context, error, stackTrace) {
+                                    return Container(
+                                      color: Colors.grey[200],
+                                      child: Icon(
+                                        Icons.image_not_supported,
+                                        color: Colors.grey[400],
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
                             ),
-                          );
-                        } else {
-                          inCart.quantity++;
-                        }
-                      });
-                    },
-                  ),
-                  IconButton(
-                    icon: Icon(Icons.favorite, color: Colors.red),
-                    onPressed: () {
-                      setState(() {
-                        item.isFavorite = false;
-                      });
-                    },
-                  ),
-                ],
+
+                            SizedBox(width: 12),
+
+                            // Product Info
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    item.name,
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.grey[800],
+                                    ),
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                  SizedBox(height: 4),
+                                  if (item.selectedVariant != null)
+                                    Container(
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 8,
+                                        vertical: 2,
+                                      ),
+                                      decoration: BoxDecoration(
+                                        color: Colors.orange[50],
+                                        borderRadius: BorderRadius.circular(4),
+                                        border: Border.all(
+                                          color: Colors.orange[200]!,
+                                          width: 0.5,
+                                        ),
+                                      ),
+                                      child: Text(
+                                        'Varian: ${item.selectedVariant}',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          color: Colors.orange[700],
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                    ),
+                                  SizedBox(height: 4),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        'Rp ${item.price.toString().replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]}.')}',
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.blue[600],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(height: 4),
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 8,
+                                      vertical: 2,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: quantityInCart > 0 
+                                          ? Colors.green[50] 
+                                          : Colors.grey[50],
+                                      borderRadius: BorderRadius.circular(4),
+                                      border: Border.all(
+                                        color: quantityInCart > 0 
+                                            ? Colors.green[200]! 
+                                            : Colors.grey[200]!,
+                                        width: 0.5,
+                                      ),
+                                    ),
+                                    child: Text(
+                                      'Di Keranjang: $quantityInCart item',
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        color: quantityInCart > 0 
+                                            ? Colors.green[700] 
+                                            : Colors.grey[600],
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+
+                            Column(
+                              children: [
+                                // Favorite Button
+                                Container(
+                                  width: 40,
+                                  height: 40,
+                                  decoration: BoxDecoration(
+                                    color: Colors.pink[50],
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  child: IconButton(
+                                    padding: EdgeInsets.zero,
+                                    icon: Icon(
+                                      Icons.favorite,
+                                      color: Colors.pink[400],
+                                      size: 20,
+                                    ),
+                                    onPressed: () {
+                                      setState(() {
+                                        item.isFavorite = false;
+                                      });
+                                    },
+                                  ),
+                                ),
+                                
+                                SizedBox(height: 8),
+                                
+                                // Quantity Controls
+                                Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.grey[50],
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Container(
+                                        width: 32,
+                                        height: 32,
+                                        child: IconButton(
+                                          padding: EdgeInsets.zero,
+                                          icon: Icon(
+                                            Icons.remove,
+                                            color: Colors.red[400],
+                                            size: 16,
+                                          ),
+                                          onPressed: () {
+                                            setState(() {
+                                              if (inCart.name != '' && inCart.quantity > 0) {
+                                                inCart.quantity--;
+                                                if (inCart.quantity == 0) {
+                                                  cart.remove(inCart);
+                                                }
+                                              }
+                                            });
+                                          },
+                                        ),
+                                      ),
+                                      Container(
+                                        padding: const EdgeInsets.symmetric(horizontal: 4),
+                                        child: Text(
+                                          '$quantityInCart',
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                      Container(
+                                        width: 32,
+                                        height: 32,
+                                        child: IconButton(
+                                          padding: EdgeInsets.zero,
+                                          icon: Icon(
+                                            Icons.add,
+                                            color: Colors.green[400],
+                                            size: 16,
+                                          ),
+                                          onPressed: () {
+                                            setState(() {
+                                              if (inCart.name == '') {
+                                                cart.add(
+                                                  Product(
+                                                    name: item.name,
+                                                    price: item.price,
+                                                    quantity: 1,
+                                                    selectedVariant:
+                                                        item.selectedVariant ?? 'Original',
+                                                  ),
+                                                );
+                                              } else {
+                                                inCart.quantity++;
+                                              }
+                                            });
+                                          },
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                ),
               ),
-            );
-          },
-        );
-  }
+            ],
+          ),
+  );
+}
 
   Future<List<Map<String, dynamic>>> getChatHistory() async {
     final prefs = await SharedPreferences.getInstance();
@@ -1234,62 +1689,92 @@ Widget _buildQuickActionItem({
   }
 
   Widget buildChatPage() {
-    List<String> contactList;
+  List<String> contactList;
 
-    if (widget.role == 'buyer') {
-      contactList = ['admin'];
-    } else {
-      contactList = [
-        'nisa',
-        'fajar',
-        'nurul',
-        'ahmad',
-        'beni',
-        'caca',
-        'denis',
-        'erlangga',
-        'faiz',
-      ];
-    }
+  if (widget.role == 'buyer') {
+    contactList = ['admin'];
+  } else {
+    contactList = [
+      'nisa',
+      'fajar',
+      'nurul',
+      'ahmad',
+      'beni',
+      'caca',
+      'denis',
+      'erlangga',
+      'faiz',
+    ];
+  }
 
-    return Scaffold(
-      backgroundColor: Colors.grey[100],
-      body: ListView.separated(
-        itemCount: contactList.length,
-        separatorBuilder:
-            (context, index) => const Divider(
-              height: 1,
-              thickness: 1,
-              indent: 16,
-              endIndent: 16,
-              color: Colors.grey,
-            ),
-        itemBuilder: (context, index) {
-          final name = contactList[index];
-          return ListTile(
+  return Scaffold(
+    backgroundColor: Colors.grey[50],
+    body: ListView.separated(
+      padding: const EdgeInsets.symmetric(vertical: 8),
+      itemCount: contactList.length,
+      separatorBuilder: (context, index) => Container(
+        height: 1,
+        margin: const EdgeInsets.only(left: 72),
+        color: Colors.grey[200],
+      ),
+      itemBuilder: (context, index) {
+        final name = contactList[index];
+        return Container(
+          margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(12),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.1),
+                blurRadius: 4,
+                offset: const Offset(0, 2),
+              ),
+            ],
+          ),
+          child: ListTile(
             contentPadding: const EdgeInsets.symmetric(
               horizontal: 16,
-              vertical: 8,
+              vertical: 12,
             ),
             leading: CircleAvatar(
-              radius: 24,
-              backgroundColor: Colors.blue.shade100,
+              radius: 26,
+              backgroundColor: _getAvatarColor(name),
               child: Text(
                 name[0].toUpperCase(),
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 18,
+                  color: Colors.white,
                 ),
               ),
             ),
             title: Text(
               name[0].toUpperCase() + name.substring(1),
-              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+              style: const TextStyle(
+                fontSize: 16, 
+                fontWeight: FontWeight.w600,
+                color: Colors.black87,
+              ),
             ),
-            trailing: const Icon(
-              Icons.arrow_forward_ios,
-              size: 16,
-              color: Colors.grey,
+            subtitle: Text(
+              widget.role == 'buyer' ? 'Administrator' : 'Pelanggan',
+              style: TextStyle(
+                fontSize: 13,
+                color: Colors.grey[600],
+              ),
+            ),
+            trailing: Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: Colors.grey[100],
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: const Icon(
+                Icons.arrow_forward_ios,
+                size: 14,
+                color: Colors.grey,
+              ),
             ),
             onTap: () {
               Navigator.push(
@@ -1299,11 +1784,28 @@ Widget _buildQuickActionItem({
                 ),
               );
             },
-          );
-        },
-      ),
-    );
-  }
+          ),
+        );
+      },
+    ),
+  );
+}
+
+Color _getAvatarColor(String name) {
+  final colors = [
+    Colors.blue,
+    Colors.green,
+    Colors.orange,
+    Colors.purple,
+    Colors.red,
+    Colors.teal,
+    Colors.indigo,
+    Colors.pink,
+    Colors.cyan,
+  ];
+  
+  return colors[name.hashCode % colors.length];
+}
 
 //header profil ------------------------------------------------------------------------------------
 
@@ -1313,6 +1815,7 @@ Widget buildProfilePage(void Function(int index) onNavigate) {
   return StatefulBuilder(
     builder: (context, setState) {
       return Scaffold(
+        backgroundColor: Colors.grey[50],
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(100),
           child: Container(
@@ -1359,84 +1862,121 @@ Widget buildProfilePage(void Function(int index) onNavigate) {
           ),
         ),
 
-//header profil-------------------------------------------------------------------------------
-
-//isi profil
-        backgroundColor: Colors.white,
         body: ListView(
           padding: const EdgeInsets.all(16.0),
           children: [
-            // Foto profil dan username
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const CircleAvatar(
-                  backgroundImage: AssetImage('assets/images/example1.png'),
-                  radius: 30,
-                ),
-                const SizedBox(width: 12),
-                Text(
-                  currentUsername.toUpperCase(),
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18,
+            // Profile Header Card
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(15),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.1),
+                    blurRadius: 10,
+                    offset: const Offset(0, 5),
                   ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 20),
-
-            // Menu List
-            ListTile(
-              leading: const Icon(Icons.notifications, color: Colors.black),
-              title: const Text('Notifikasi'),
-              trailing: Switch(
-                value: isNotifikasiOn,
-                activeColor: Colors.blue,
-                onChanged: (val) {
-                  setState(() {
-                    isNotifikasiOn = val;
-                  });
-                },
+                ],
+              ),
+              child: Column(
+                children: [
+                  const CircleAvatar(
+                    backgroundImage: AssetImage('assets/images/example1.png'),
+                    radius: 40,
+                  ),
+                  const SizedBox(height: 15),
+                  Text(
+                    currentUsername.toUpperCase(),
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                      color: Colors.black87,
+                    ),
+                  ),
+                  const SizedBox(height: 5),
+                ],
               ),
             ),
-            ListTile(
-              leading: const Icon(Icons.person, color: Colors.black),
-              title: const Text('Lihat Profil'),
-              trailing: const Icon(Icons.chevron_right),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) => EditProfilePage()),
-                );
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.favorite, color: Colors.deepOrange),
-              title: const Text('Suka'),
-              trailing: const Icon(Icons.chevron_right),
-              onTap: () {
-                onNavigate(2); // pindah ke Favorit Page
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.shopping_cart, color: Colors.black),
-              title: const Text('Keranjang'),
-              trailing: const Icon(Icons.chevron_right),
-              onTap: () {
-                onNavigate(1); // pindah ke Cart Page
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.help, color: Colors.black),
-              title: const Text('Pusat Bantuan'),
-              trailing: const Icon(Icons.chevron_right),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) => HelpCenterPage()),
-                );
-              },
+            
+            const SizedBox(height: 20),
+
+            // Menu Section
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(15),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.1),
+                    blurRadius: 10,
+                    offset: const Offset(0, 5),
+                  ),
+                ],
+              ),
+              child: Column(
+                children: [
+                  _buildMenuTile(
+                    icon: Icons.notifications,
+                    title: 'Notifikasi',
+                    iconColor: Colors.orange,
+                    trailing: Switch(
+                      value: isNotifikasiOn,
+                      activeColor: Colors.blue,
+                      onChanged: (val) {
+                        setState(() {
+                          isNotifikasiOn = val;
+                        });
+                      },
+                    ),
+                    isFirst: true,
+                  ),
+                  _buildDivider(),
+                  _buildMenuTile(
+                    icon: Icons.person,
+                    title: 'Lihat Profil',
+                    iconColor: Colors.blue,
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => EditProfilePage()),
+                      );
+                    },
+                  ),
+                  _buildDivider(),
+                  _buildMenuTile(
+                    icon: Icons.favorite,
+                    title: 'Suka',
+                    iconColor: Colors.red,
+                    onTap: () {
+                      onNavigate(2); // pindah ke Favorit Page
+                    },
+                  ),
+                  _buildDivider(),
+                  _buildMenuTile(
+                    icon: Icons.shopping_cart,
+                    title: 'Keranjang',
+                    iconColor: Colors.green,
+                    onTap: () {
+                      onNavigate(1); // pindah ke Cart Page
+                    },
+                  ),
+                  _buildDivider(),
+                  _buildMenuTile(
+                    icon: Icons.help,
+                    title: 'Pusat Bantuan',
+                    iconColor: Colors.purple,
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => HelpCenterPage()),
+                      );
+                    },
+                    isLast: true,
+                  ),
+                ],
+              ),
             ),
           ],
         ),
@@ -1445,178 +1985,586 @@ Widget buildProfilePage(void Function(int index) onNavigate) {
   );
 }
 
+Widget _buildMenuTile({
+  required IconData icon,
+  required String title,
+  required Color iconColor,
+  Widget? trailing,
+  VoidCallback? onTap,
+  bool isFirst = false,
+  bool isLast = false,
+}) {
+  return Container(
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.vertical(
+        top: isFirst ? const Radius.circular(15) : Radius.zero,
+        bottom: isLast ? const Radius.circular(15) : Radius.zero,
+      ),
+    ),
+    child: ListTile(
+      contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+      leading: Container(
+        padding: const EdgeInsets.all(8),
+        decoration: BoxDecoration(
+          color: iconColor.withOpacity(0.1),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Icon(
+          icon,
+          color: iconColor,
+          size: 22,
+        ),
+      ),
+      title: Text(
+        title,
+        style: const TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.w500,
+          color: Colors.black87,
+        ),
+      ),
+      trailing: trailing ?? 
+        Container(
+          padding: const EdgeInsets.all(6),
+          decoration: BoxDecoration(
+            color: Colors.grey[100],
+            borderRadius: BorderRadius.circular(15),
+          ),
+          child: const Icon(
+            Icons.chevron_right,
+            size: 18,
+            color: Colors.grey,
+          ),
+        ),
+      onTap: onTap,
+    ),
+  );
+}
+
+Widget _buildDivider() {
+  return Container(
+    height: 1,
+    margin: const EdgeInsets.only(left: 72),
+    color: Colors.grey[100],
+  );
+}
+
 //isi profil----------------------
 
-  Widget buildPaymentPage() {
-    String selectedMethod = 'COD';
-    List<String> paymentMethods = ['COD', 'Transfer Bank', 'E-Wallet'];
-    int diskon = 0; // contoh diskon 0
-    int totalItems = cart.fold(0, (sum, item) => sum + item.quantity);
-    int totalHarga = cart.fold(
-      0,
-      (sum, item) => sum + item.price * item.quantity,
-    );
-    int totalBayar = totalHarga - diskon;
+Widget buildPaymentPage() {
+  String selectedMethod = 'COD';
+  List<String> paymentMethods = ['COD', 'Transfer Bank', 'E-Wallet'];
+  int diskon = 0; 
+  int totalItems = cart.fold(0, (sum, item) => sum + item.quantity);
+  int totalHarga = cart.fold(
+    0,
+    (sum, item) => sum + item.price * item.quantity,
+  );
+  int totalBayar = totalHarga - diskon;
 
-    return StatefulBuilder(
-      builder: (context, setState) {
-        return Scaffold(
-          appBar: PreferredSize(
-            preferredSize: const Size.fromHeight(100),
-            child: Container(
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [Color(0xFF2196F3), Color(0xFF0D47A1)],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ),
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(30),
-                  bottomRight: Radius.circular(30),
-                ),
+  return StatefulBuilder(
+    builder: (context, setState) {
+      return Scaffold(
+        backgroundColor: const Color(0xFFF5F5F5),
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(100),
+          child: Container(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                colors: [Color(0xFF2196F3), Color(0xFF0D47A1)],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
               ),
-              child: SafeArea(
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 10, left: 16, right: 16),
-                  child: Stack(
-                    children: [
-                      // Tombol kembali di kiri
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: IconButton(
-                          icon: const Icon(
-                            Icons.arrow_back,
-                            color: Colors.white,
-                          ),
-                          onPressed: () => Navigator.pop(context),
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(30),
+                bottomRight: Radius.circular(30),
+              ),
+            ),
+            child: SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.only(top: 10, left: 16, right: 16),
+                child: Stack(
+                  children: [
+                    // Tombol kembali di kiri
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: IconButton(
+                        icon: const Icon(
+                          Icons.arrow_back,
+                          color: Colors.white,
+                        ),
+                        onPressed: () => Navigator.pop(context),
+                      ),
+                    ),
+
+                    // Judul di tengah
+                    const Align(
+                      alignment: Alignment.center,
+                      child: Text(
+                        'Pembayaran',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 28,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
-
-                      // Judul di tengah
-                      const Align(
-                        alignment: Alignment.center,
-                        child: Text(
-                          'Pembayaran',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 28,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-
-                      // Logo di kanan
-                      // Align(
-                      //   alignment: Alignment.centerRight,
-                      //   child: Image.asset(
-                      //     'assets/images/logo.png',
-                      //     height: 120,
-                      //     width: 120,
-                      //   ),
-                      // ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ),
           ),
+        ),
+        body: Column(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Order 
+                    Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(12),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.1),
+                            spreadRadius: 1,
+                            blurRadius: 4,
+                            offset: Offset(0, 2),
+                          ),
+                        ],
+                      ),
+                      child: Row(
+                        children: [
+                          Icon(Icons.shopping_bag, color: Colors.blue[600], size: 24),
+                          SizedBox(width: 12),
+                          Text(
+                            'Ringkasan Pesanan ($totalItems item)',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.grey[800],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
 
-          body: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Produk yang dipesan:',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                ),
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: cart.length,
-                    itemBuilder: (context, index) {
-                      var item = cart[index];
-                      return ListTile(
-                        leading: Image.asset(
-                          'assets/images/${item.name.toLowerCase().replaceAll(' ', '_')}.png',
-                          width: 50,
-                          height: 50,
-                          fit: BoxFit.cover,
+                    SizedBox(height: 16),
+
+                    // Products List
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(12),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.1),
+                            spreadRadius: 1,
+                            blurRadius: 4,
+                            offset: Offset(0, 2),
+                          ),
+                        ],
+                      ),
+                      child: ListView.separated(
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        itemCount: cart.length,
+                        separatorBuilder: (context, index) => Divider(
+                          height: 1,
+                          color: Colors.grey[200],
                         ),
-                        title: Text(item.name),
-                        subtitle: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            if (item.selectedVariant != null)
-                              Text('Varian: ${item.selectedVariant}'),
-                            Text('Rp ${item.price} x ${item.quantity}'),
-                          ],
+                        itemBuilder: (context, index) {
+                          var item = cart[index];
+                          return Padding(
+                            padding: const EdgeInsets.all(12),
+                            child: Row(
+                              children: [
+                                // Product Image
+                                Container(
+                                  width: 50,
+                                  height: 50,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8),
+                                    color: Colors.grey[100],
+                                  ),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(8),
+                                    child: Image.asset(
+                                      'assets/images/${item.name.toLowerCase().replaceAll(' ', '_')}.png',
+                                      width: 50,
+                                      height: 50,
+                                      fit: BoxFit.cover,
+                                      errorBuilder: (context, error, stackTrace) {
+                                        return Container(
+                                          color: Colors.grey[200],
+                                          child: Icon(
+                                            Icons.image_not_supported,
+                                            color: Colors.grey[400],
+                                            size: 20,
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                ),
+
+                                SizedBox(width: 12),
+
+                                // Product Info
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        item.name,
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w600,
+                                          color: Colors.grey[800],
+                                        ),
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                      SizedBox(height: 4),
+                                      if (item.selectedVariant != null)
+                                        Container(
+                                          padding: const EdgeInsets.symmetric(
+                                            horizontal: 6,
+                                            vertical: 2,
+                                          ),
+                                          decoration: BoxDecoration(
+                                            color: Colors.orange[50],
+                                            borderRadius: BorderRadius.circular(4),
+                                            border: Border.all(
+                                              color: Colors.orange[200]!,
+                                              width: 0.5,
+                                            ),
+                                          ),
+                                          child: Text(
+                                            'Varian: ${item.selectedVariant}',
+                                            style: TextStyle(
+                                              fontSize: 10,
+                                              color: Colors.orange[700],
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                          ),
+                                        ),
+                                      SizedBox(height: 4),
+                                      Row(
+                                        children: [
+                                          Text(
+                                            'Rp ${item.price.toString().replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]}.')}',
+                                            style: TextStyle(
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.blue[600],
+                                            ),
+                                          ),
+                                          Text(
+                                            ' x ${item.quantity}',
+                                            style: TextStyle(
+                                              fontSize: 12,
+                                              color: Colors.grey[600],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+
+                                // Item Total
+                                Text(
+                                  'Rp ${(item.price * item.quantity).toString().replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]}.')}',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.grey[800],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+
+                    SizedBox(height: 20),
+
+                    // Payment Method
+                    Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(12),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.1),
+                            spreadRadius: 1,
+                            blurRadius: 4,
+                            offset: Offset(0, 2),
+                          ),
+                        ],
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Icon(Icons.payment, color: Colors.green[600], size: 24),
+                              SizedBox(width: 12),
+                              Text(
+                                'Metode Pembayaran',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.grey[800],
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 12),
+                          Container(
+                            width: double.infinity,
+                            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.grey[300]!),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: DropdownButton<String>(
+                              value: selectedMethod,
+                              isExpanded: true,
+                              underline: SizedBox(),
+                              items: paymentMethods.map((String value) {
+                                IconData icon;
+                                Color color;
+                                switch (value) {
+                                  case 'COD':
+                                    icon = Icons.local_shipping;
+                                    color = Colors.orange;
+                                    break;
+                                  case 'Transfer Bank':
+                                    icon = Icons.account_balance;
+                                    color = Colors.blue;
+                                    break;
+                                  case 'E-Wallet':
+                                    icon = Icons.wallet;
+                                    color = Colors.green;
+                                    break;
+                                  default:
+                                    icon = Icons.payment;
+                                    color = Colors.grey;
+                                }
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Row(
+                                    children: [
+                                      Icon(icon, size: 20, color: color),
+                                      SizedBox(width: 12),
+                                      Text(value),
+                                    ],
+                                  ),
+                                );
+                              }).toList(),
+                              onChanged: (newValue) {
+                                setState(() {
+                                  selectedMethod = newValue!;
+                                });
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    SizedBox(height: 20),
+
+                    // Price 
+                    Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(12),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.1),
+                            spreadRadius: 1,
+                            blurRadius: 4,
+                            offset: Offset(0, 2),
+                          ),
+                        ],
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Icon(Icons.receipt_long, color: Colors.purple[600], size: 24),
+                              SizedBox(width: 12),
+                              Text(
+                                'Rincian Pembayaran',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.grey[800],
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 12),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Subtotal ($totalItems item)',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  color: Colors.grey[600],
+                                ),
+                              ),
+                              Text(
+                                'Rp ${totalHarga.toString().replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]}.')}',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  color: Colors.grey[800],
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 8),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Diskon',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  color: Colors.grey[600],
+                                ),
+                              ),
+                              Text(
+                                '- Rp ${diskon.toString().replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]}.')}',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  color: Colors.green[600],
+                                ),
+                              ),
+                            ],
+                          ),
+                          Divider(color: Colors.grey[300], height: 20),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Total Pembayaran',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.grey[800],
+                                ),
+                              ),
+                              Text(
+                                'Rp ${totalBayar.toString().replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]}.')}',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.blue[700],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    SizedBox(height: 100),
+                  ],
+                ),
+              ),
+            ),
+
+            // Bottom Payment Button
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(20),
+                  topRight: Radius.circular(20),
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.2),
+                    spreadRadius: 1,
+                    blurRadius: 8,
+                    offset: Offset(0, -2),
+                  ),
+                ],
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(20),
+                child: Container(
+                  width: double.infinity,
+                  height: 50,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => buildSuccessPage(
+                            totalBayar,
+                            selectedMethod,
+                            totalItems,
+                            diskon,
+                          ),
                         ),
                       );
                     },
-                  ),
-                ),
-                SizedBox(height: 10),
-                Text(
-                  'Metode Pembayaran:',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                DropdownButton<String>(
-                  value: selectedMethod,
-                  isExpanded: true,
-                  items:
-                      paymentMethods.map((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
-                  onChanged: (newValue) {
-                    setState(() {
-                      selectedMethod = newValue!;
-                    });
-                  },
-                ),
-                SizedBox(height: 10),
-                Text('Diskon: Rp $diskon'),
-                Text('Total Pesanan ($totalItems item): Rp $totalHarga'),
-                Text(
-                  'Total Pembayaran: Rp $totalBayar',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                SizedBox(height: 20),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder:
-                            (context) => buildSuccessPage(
-                              totalBayar,
-                              selectedMethod,
-                              totalItems,
-                              diskon,
-                            ),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.blue[600],
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
                       ),
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue,  //tombol lanjutkan pembayaran dan pesan sekarang
-                    minimumSize: Size(double.infinity, 50), // tombol full width
-                  ),
-                  child: Text(
-                    'Pesan Sekarang',
-                    style: TextStyle(fontSize: 18, color: Colors.white),
+                      elevation: 2,
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.shopping_cart_checkout,
+                          color: Colors.white,
+                          size: 20,
+                        ),
+                        SizedBox(width: 8),
+                        Text(
+                          'Pesan Sekarang',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ],
+              ),
             ),
-          ),
-        );
-      },
-    );
-  }
+          ],
+        ),
+      );
+    },
+  );
+}
 
-  Widget buildSuccessPage(
+Widget buildSuccessPage(
     int totalBayar,
     String metodePembayaran,
     int totalItems,
@@ -1627,6 +2575,7 @@ Widget buildProfilePage(void Function(int index) onNavigate) {
     String namaPemesan = currentUsername.toUpperCase(); // contoh nama
 
     return Scaffold(
+      backgroundColor: Colors.grey[50],
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(100),
         child: Container(
@@ -1635,8 +2584,6 @@ Widget buildProfilePage(void Function(int index) onNavigate) {
               colors: [
                 Color(0xFF2196F3),
                 Color(0xFF0D47A1),
-                
-          
               ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
@@ -1680,39 +2627,136 @@ Widget buildProfilePage(void Function(int index) onNavigate) {
       ),
 
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(20.0),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(Icons.check_circle, color: Colors.green, size: 100),
-              SizedBox(height: 20),
+              // Success Icon
+              Container(
+                padding: const EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  color: Colors.green.shade50,
+                  shape: BoxShape.circle,
+                ),
+                child: Icon(
+                  Icons.check_circle, 
+                  color: Colors.green, 
+                  size: 100
+                ),
+              ),
+              
+              const SizedBox(height: 30),
+              
               Text(
                 'Pesanan Anda Berhasil!',
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  fontSize: 24, 
+                  fontWeight: FontWeight.bold,
+                  color: Colors.grey[800],
+                ),
               ),
-              SizedBox(height: 20),
-              Text('Alamat Toko: Jl. Letjen Sutoyo, Wirobrajan, Yogyakarta'),
-              Text('Total Pembayaran: Rp $totalBayar'),
-              Text('Metode Pembayaran: $metodePembayaran'),
-              Text('Total Pesanan: $totalItems item'),
-              Text('Diskon: Rp $diskon'),
-              Text('Kode Pesanan: $kodePesanan'),
-              Text('Nama Pemesan: $namaPemesan'),
-              SizedBox(height: 20),
-              Text(
-                'Ambil pesanan dalam 24 jam sebelum kode pesanan kadaluarsa!',
-                style: TextStyle(color: Colors.red),
-                textAlign: TextAlign.center,
+              
+              const SizedBox(height: 30),
+              
+              // Detail Container
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(15),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.1),
+                      blurRadius: 10,
+                      offset: const Offset(0, 5),
+                    ),
+                  ],
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _buildDetailRow('Alamat Toko', 'Jl. Letjen Sutoyo, Bantul, Yogyakarta'),
+                    _buildDetailRow('Total Pembayaran', 'Rp $totalBayar'),
+                    _buildDetailRow('Metode Pembayaran', metodePembayaran),
+                    _buildDetailRow('Total Pesanan', '$totalItems item'),
+                    _buildDetailRow('Diskon', 'Rp $diskon'),
+                    _buildDetailRow('Kode Pesanan', '$kodePesanan'),
+                    _buildDetailRow('Nama Pemesan', namaPemesan),
+                  ],
+                ),
               ),
-              Text(
-                'Bila pesanan ingin diantar, silahkan konfirmasi melalui chat!',
-                style: TextStyle(color: Colors.red),
-                textAlign: TextAlign.center,
+              
+              const SizedBox(height: 20),
+              
+              // Warning Container
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(15),
+                decoration: BoxDecoration(
+                  color: Colors.orange.shade50,
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(color: Colors.orange.shade200),
+                ),
+                child: Column(
+                  children: [
+                    Text(
+                      'Ambil pesanan dalam 24 jam sebelum kode pesanan kadaluarsa!',
+                      style: TextStyle(
+                        color: Colors.orange[700],
+                        fontWeight: FontWeight.w500,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      'Bila pesanan ingin diantar, silahkan konfirmasi melalui chat!',
+                      style: TextStyle(
+                        color: Colors.orange[700],
+                        fontWeight: FontWeight.w500,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildDetailRow(String label, String value) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 6),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            flex: 2,
+            child: Text(
+              '$label:',
+              style: TextStyle(
+                fontSize: 14,
+                color: Colors.grey[600],
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
+          Expanded(
+            flex: 3,
+            child: Text(
+              value,
+              style: TextStyle(
+                fontSize: 14,
+                color: Colors.grey[800],
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
