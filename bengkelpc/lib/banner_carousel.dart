@@ -13,33 +13,33 @@ class _BannerCarouselState extends State<BannerCarousel> {
   int _currentPage = 0;
   Timer? _timer;
 
-  // Data banner 
+  // Data banner - bisa disesuaikan dengan kebutuhan
   final List<BannerData> banners = [
     BannerData(
       title: "Promo Spesial CPU Intel!",
       subtitle: "Diskon hingga 25% untuk semua seri Intel Core",
-      imageUrl: "assets/images/banner_intel.jpg", 
+      imageUrl: "assets/images/banner_intel.jpg", // ganti dengan asset yang ada
       backgroundColor: const Color(0xFF1E88E5),
       gradientColor: const Color(0xFF0D47A1),
     ),
     BannerData(
       title: "AMD Ryzen Terbaik",
       subtitle: "Performa gaming terdepan dengan harga terjangkau",
-      imageUrl: "assets/images/banner_amd.jpg", 
+      imageUrl: "assets/images/banner_amd.jpg", // ganti dengan asset yang ada
       backgroundColor: const Color(0xFFE53935),
       gradientColor: const Color(0xFFB71C1C),
     ),
     BannerData(
       title: "Build PC Gaming Impian",
       subtitle: "Konsultasi gratis dengan expert kami",
-      imageUrl: "assets/images/banner_gaming.jpg", 
+      imageUrl: "assets/images/banner_gaming.jpg", // ganti dengan asset yang ada
       backgroundColor: const Color(0xFF43A047),
       gradientColor: const Color(0xFF2E7D32),
     ),
     BannerData(
       title: "Free Ongkir Se-Indonesia",
       subtitle: "Untuk pembelian minimal Rp 500.000",
-      imageUrl: "assets/images/banner_shipping.jpg",
+      imageUrl: "assets/images/banner_shipping.jpg", // ganti dengan asset yang ada
       backgroundColor: const Color(0xFFFF9800),
       gradientColor: const Color(0xFFE65100),
     ),
