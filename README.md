@@ -127,7 +127,7 @@ Saat ini project berada dalam tahap **perencanaan**. Kami sedang merancang arsit
 | Nama        | Posisi                        | NIM                                         | GitHub       |
 |-------------|-------------------------------|---------------------------------------------|--------------|
 | Radinka Rafi | Project Manager              | 23106050059                                 | [@rafiradinka](https://github.com/rafiradinka) |
-| Azza   |  Developer                         | 231060500                                 | [@azzatuz](https://github.com/azzatuz) |
+| Azza   |  Developer                         | 23106050014                                 | [@azzatuz](https://github.com/azzatuz) |
 | Diva Ahmad   | UI/UX Designer               | 23106050076                                 | [@DivaIsReal](https://github.com/DivaIsReal) |
 | Fauzan Zaki   | Maintener                   | 23106050047                                 | [@FauzanZF](https://github.com/FauzanZF) |
 
